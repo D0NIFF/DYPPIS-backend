@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('complaint_statuses', function (Blueprint $table) {
+        Schema::create('platform_types', function (Blueprint $table) {
             $table->uuid('id')
                 ->primary();
 
-            $table->string('title', 100);
-            $table->string('description', 355);
+            $table->string('slug', 100)
+                ->unique();
+
+            $table->jsonb('title');
+
+            $table->string('img', 150);
         });
     }
 
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('complaint_statuses');
+        Schema::dropIfExists('platform_types');
     }
 };

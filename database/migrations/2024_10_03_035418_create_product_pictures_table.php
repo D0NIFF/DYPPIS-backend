@@ -11,22 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('platforms', function (Blueprint $table) {
+        Schema::create('product_pictures', function (Blueprint $table) {
             $table->uuid('id')
                 ->primary();
 
-            $table->string('slug', 100)
-                ->unique();
-
-            $table->jsonb('title');
+            $table->uuid('product_id')
+                ->nullable();
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products');
 
             $table->string('img', 150);
-            $table->string('banner', 150);
-            $table->uuid('type_id');
-
-            $table->foreign('type_id')
-                ->references('id')
-                ->on('platform_types');
+            $table->timestamp('created_at')
+                ->default(now());
         });
     }
 
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('platforms');
+        Schema::dropIfExists('product_pictures');
     }
 };

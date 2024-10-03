@@ -12,8 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_categories', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->uuid('id')
+                ->primary();
+
+            $table->string('slug', 100)
+                ->unique();
+
+            $table->jsonb('title');
+
+            $table->string('img', 150);
+
+            $table->boolean('is_public')
+                ->default(false);
         });
     }
 

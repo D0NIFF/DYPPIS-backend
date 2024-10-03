@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_deliveries', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->uuid('id')
+                ->primary();
+
+            $table->jsonb('title');
+            $table->jsonb('description');
         });
     }
 

@@ -12,8 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_filters', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->uuid('category_id');
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('product_categories');
+
+            $table->uuid('platform_id');
+            $table->foreign('platform_id')
+                ->references('id')
+                ->on('platforms');
+
+            $table->json('filters');
+
+            $table->primary(['category_id', 'platform_id']);
         });
     }
 

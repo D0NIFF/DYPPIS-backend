@@ -11,6 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('complaint_statuses', function (Blueprint $table) {
+            $table->uuid('id')
+                ->primary();
+
+            $table->string('title', 100);
+            $table->string('description', 355);
+        });
+
         Schema::create('complaints', function (Blueprint $table) {
             $table->uuid('id')
                 ->primary();
@@ -39,5 +47,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('complaints');
+        Schema::dropIfExists('complaint_statuses');
     }
 };
