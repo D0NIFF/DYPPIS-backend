@@ -25,7 +25,10 @@ return new class extends Migration
             $table->string('method', 100)
                 ->nullable();
 
-            $table->timestamps(['verified_at', 'created_at']);
+            $table->timestamp('verified_at')
+                ->nullable();
+            $table->timestamp('created_at')
+                ->useCurrent();
         });
     }
 

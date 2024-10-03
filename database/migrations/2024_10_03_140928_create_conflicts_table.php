@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('title', 100);
             $table->text('description');
 
-            $table->timestamps(['created_at']);
+            $table->timestamp('created_at')
+                ->useCurrent();
         });
     }
 
