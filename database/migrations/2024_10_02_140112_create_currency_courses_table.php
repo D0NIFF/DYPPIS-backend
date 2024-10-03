@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('currency_courses', function (Blueprint $table) {
 
-            $table->unsignedBigInteger('from_currency_id');
-            $table->foreign('from_currency_id')
-                ->references('id')
+            $table->uuid('from_currency_uuid');
+            $table->foreign('from_currency_uuid')
+                ->references('uuid')
                 ->on('currencies');
 
-            $table->unsignedBigInteger('to_currency_id');
-            $table->foreign('to_currency_id')
-                ->references('id')
+            $table->uuid('to_currency_uuid');
+            $table->foreign('to_currency_uuid')
+                ->references('uuid')
                 ->on('currencies');
 
-            $table->primary(['from_currency_id', 'to_currency_id']);
+            $table->primary(['from_currency_uuid', 'to_currency_uuid']);
 
             $table->float('value');
 

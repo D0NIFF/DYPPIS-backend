@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('countries', function (Blueprint $table) {
-            $table->id();
+            $table->uuid()
+                ->primary();
 
             $table->string('title');
 
@@ -22,14 +23,14 @@ return new class extends Migration
             $table->string('iso_code_2')
                 ->unique();
 
-            $table->unsignedBigInteger('currency_id');
-            $table->foreign('currency_id')
-                ->references('id')
+            $table->uuid('currency_uuid');
+            $table->foreign('currency_uuid')
+                ->references('uuid')
                 ->on('currencies');
 
-            $table->unsignedBigInteger('language_id');
-            $table->foreign('language_id')
-                ->references('id')
+            $table->uuid('language_uuid');
+            $table->foreign('language_uuid')
+                ->references('uuid')
                 ->on('languages');
         });
     }
