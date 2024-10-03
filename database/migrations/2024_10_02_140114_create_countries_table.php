@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('countries', function (Blueprint $table) {
-            $table->uuid()
+            $table->uuid('id')
                 ->primary();
 
             $table->string('title');
@@ -23,14 +23,14 @@ return new class extends Migration
             $table->string('iso_code_2')
                 ->unique();
 
-            $table->uuid('currency_uuid');
-            $table->foreign('currency_uuid')
-                ->references('uuid')
+            $table->uuid('currency_id');
+            $table->foreign('currency_id')
+                ->references('id')
                 ->on('currencies');
 
-            $table->uuid('language_uuid');
-            $table->foreign('language_uuid')
-                ->references('uuid')
+            $table->uuid('language_id');
+            $table->foreign('language_id')
+                ->references('id')
                 ->on('languages');
         });
     }
