@@ -11,23 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personal_access_tokens', function (Blueprint $table) {
+        Schema::create('image_files', function (Blueprint $table) {
             $table->uuid('id')
                 ->primary();
 
-            $table->morphs('tokenable');
+            $table->string('file_name')
+                ->nullable();
+            $table->string('file_path')
+                ->nullable();
+            $table->string('file_url')
+                ->nullable();
+            $table->string('file_type')
+                ->nullable();
+            $table->string('file_size')
+                ->nullable();
 
-            $table->string('name');
-
-            $table->string('token', 64)
-                ->unique();
-            $table->text('abilities')
-                ->nullable();
-            $table->timestamp('last_used_at')
-                ->nullable();
-            $table->timestamp('expires_at')
-                ->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')
+                ->useCurrent();
         });
     }
 
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personal_access_tokens');
+        Schema::dropIfExists('image_files');
     }
 };

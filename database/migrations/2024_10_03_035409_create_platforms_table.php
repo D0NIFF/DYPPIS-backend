@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug', 100)
                 ->unique();
 
-            $table->jsonb('title');
+            $table->string('title', 150);
 
             $table->string('img', 150);
             $table->string('banner', 150);

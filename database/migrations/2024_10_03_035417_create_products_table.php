@@ -22,8 +22,10 @@ return new class extends Migration
                 ->index();
             $table->fullText('description', 'FULLTEXT_DESCRIPTION');
 
-            $table->float('price');
-            $table->float('old_price');
+            $table->float('price')
+                ->default(1);
+            $table->float('old_price')
+                ->nullable();
 
             $table->jsonb('filters');
 
