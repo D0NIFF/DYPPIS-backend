@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\ProductService\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -14,8 +16,8 @@ class User extends Authenticatable
     use HasFactory, HasApiTokens, Notifiable;
 
 
-    public $incrementing = false;
     protected $keyType = 'string';
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -36,7 +38,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'pivot',
     ];
+
+    /*
+
+    php artisan make:resource V1/UserService/UserResource && php artisan make:resource V1/UserService/UserCollection --collection
+     */
 
     /**
      * Get the attributes that should be cast.
@@ -49,5 +57,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function getProducts()
+    {
+        return $this->belongsToMany(Product::class, 'products_users', 'user_id', 'product_id')
+            ->where('deleted_at', '=', null)
+            ->get();
     }
 }
