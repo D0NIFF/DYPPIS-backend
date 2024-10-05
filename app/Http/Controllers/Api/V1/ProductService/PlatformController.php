@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Api\V1\ProductService;
 
 use App\Contracts\RestfulControllerInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\ProductService\PlatformCollection;
+use App\Http\Resources\V1\ProductService\PlatformResource;
+use App\Http\Resources\V1\ProductService\ProductCategoryResource;
 use App\Http\Resources\V1\ProductService\ProductCollection;
+use App\Models\ProductService\Platform;
 use App\Models\ProductService\Product;
+use App\Models\ProductService\ProductCategory;
 use Illuminate\Http\Request;
 
 class PlatformController extends Controller implements RestfulControllerInterface
@@ -18,21 +23,35 @@ class PlatformController extends Controller implements RestfulControllerInterfac
      */
     public function index(Request $request) : mixed
     {
-        $products = Product::all();
-        return new ProductCollection($products);
+        $products = Platform::paginate((int)$request->get('perPage', 30), ['*'], 'page', (int)$request->get('page', 1));
+        return new PlatformCollection($products);
     }
 
 
     /**
      *  [GET] - Show the product by id
      *
-     *  @param string $slug
-     *  @return void
+     *  @param string $id
+     *  @return mixed
      */
-    public function show(string $slug) : Mixed
+    public function show(Request $request, string $id) : mixed
     {
-        $products = Product::all();
-        return new ProductCollection($products);
+        try {
+            $resource = null;
+            if(ProductHelperController::isUuid($id))
+                $resource = Platform::where('id', $id)->firstOrFail();
+            else
+                $resource = Platform::where('slug', $id)->firstOrFail();
+        }
+        catch (\Exception $e) {
+            return response()
+                ->json([
+                    'message' => $e->getMessage(),
+                    'code' => $e->getCode(),
+                    'error' => 'Not found',
+                ], 404);
+        }
+        return new PlatformResource($resource);
     }
 
 
