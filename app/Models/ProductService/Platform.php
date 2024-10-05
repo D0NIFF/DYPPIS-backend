@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 class Platform extends Model
 {
+
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected $fillable = [
         'id',
@@ -57,5 +61,13 @@ class Platform extends Model
         return $this->hasMany(Product::class, 'platform_id')
             ->paginate((int) $request->get('perPage', 30), ['*'], 'page', (int) $request->get('page', 1));
     }
+
+
+    public function getCategories() : mixed
+    {
+        return $this->belongsToMany(ProductCategory::class, 'product_filters', 'platform_id', 'category_id')
+            ->get();
+    }
+
 
 }
