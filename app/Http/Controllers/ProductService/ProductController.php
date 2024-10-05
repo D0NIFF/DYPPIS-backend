@@ -6,9 +6,19 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    public static function getDiscount(int $price, int $oldPrice): int
+
+    /**
+     *  Method calculating the product discount and return the result in %
+     *
+     *  @param int $price
+     *  @param int|null $oldPrice
+     *  @return int|null
+     */
+    public static function getDiscount(int $price, ?int $oldPrice): ?int
     {
-        $percentValue = $price / 100; // Gets 1% of the price
-        return ($price - $oldPrice) / $percentValue;
+        if($price > $oldPrice || $price == null || $oldPrice == null) return null;
+
+        $percentValue = $oldPrice / 100; // Gets 1% of the price
+        return ($oldPrice - $price) / $percentValue;
     }
 }
