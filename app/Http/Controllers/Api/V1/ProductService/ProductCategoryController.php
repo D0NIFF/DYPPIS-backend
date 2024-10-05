@@ -23,7 +23,7 @@ class ProductCategoryController extends Controller implements RestfulControllerI
      */
     public function index(Request $request) : ProductCategoryCollection
     {
-        $resource = ProductCategory::paginate($request->get('perPage', 30), ['*'], 'page', $request->get('page', 1));
+        $resource = ProductCategory::paginate((int)$request->get('perPage', 30), ['*'], 'page', (int)$request->get('page', 1));
         return new ProductCategoryCollection($resource);
     }
 
