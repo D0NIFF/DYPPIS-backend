@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\V1\ProductService\PlatformController;
-use App\Http\Controllers\Api\V1\ProductService\ProductCategoryController;
-use App\Http\Controllers\Api\V1\ProductService\ProductController;
+use App\Http\Controllers\Api\V1\ProductService\PlatformApiController;
+use App\Http\Controllers\Api\V1\ProductService\ProductCategoryApiController;
+use App\Http\Controllers\Api\V1\ProductService\ProductApiController;
 use App\Http\Controllers\Auth\PersonalAccessTokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,42 +33,42 @@ Route::prefix('v1')->group(function () {
 
     Route::prefix('platforms')->group(function () {
 
-        Route::get('/', [PlatformController::class, 'index']);
-        Route::get('/{id}', [PlatformController::class, 'show']);
-        Route::post('/', [PlatformController::class, 'store'])
+        Route::get('/', [PlatformApiController::class, 'index']);
+        Route::get('/{id}', [PlatformApiController::class, 'show']);
+        Route::post('/', [PlatformApiController::class, 'store'])
             ->middleware('auth:sanctum');
-        Route::put('/{id}', [PlatformController::class, 'update'])
+        Route::put('/{id}', [PlatformApiController::class, 'update'])
             ->middleware('auth:sanctum');
-        Route::patch('/{id}', [PlatformController::class, 'update'])
+        Route::patch('/{id}', [PlatformApiController::class, 'update'])
             ->middleware('auth:sanctum');
-        Route::delete('/{id}', [PlatformController::class, 'destroy'])
+        Route::delete('/{id}', [PlatformApiController::class, 'destroy'])
             ->middleware('auth:sanctum');
     });
 
 
     Route::prefix('products')->group(function () {
 
-        Route::get('/', [ProductController::class, 'index']);
-        Route::get('/{id}', [ProductController::class, 'show']);
-        Route::post('/', [ProductController::class, 'store'])
+        Route::get('/', [ProductApiController::class, 'index']);
+        Route::get('/{id}', [ProductApiController::class, 'show']);
+        Route::post('/', [ProductApiController::class, 'store'])
             ->middleware('auth:sanctum');
-        Route::patch('/{product_id}', [ProductController::class, 'update'])
+        Route::patch('/{product_id}', [ProductApiController::class, 'update'])
             ->middleware('auth:sanctum');
-        Route::delete('/{product_id}', [ProductController::class, 'destroy'])
+        Route::delete('/{product_id}', [ProductApiController::class, 'destroy'])
             ->middleware('auth:sanctum');
     });
 
     Route::prefix('categories')->group(function () {
 
-        Route::get('/', [ProductCategoryController::class, 'index']);
-        Route::get('/{id}', [ProductCategoryController::class, 'show']);
-        Route::post('/', [ProductCategoryController::class, 'store'])
+        Route::get('/', [ProductCategoryApiController::class, 'index']);
+        Route::get('/{id}', [ProductCategoryApiController::class, 'show']);
+        Route::post('/', [ProductCategoryApiController::class, 'store'])
             ->middleware('auth:sanctum');
-        Route::put('/{id}', [ProductCategoryController::class, 'update'])
+        Route::put('/{id}', [ProductCategoryApiController::class, 'update'])
             ->middleware('auth:sanctum');
-        Route::patch('/{id}', [ProductCategoryController::class, 'update'])
+        Route::patch('/{id}', [ProductCategoryApiController::class, 'update'])
             ->middleware('auth:sanctum');
-        Route::delete('/{id}', [ProductCategoryController::class, 'destroy'])
+        Route::delete('/{id}', [ProductCategoryApiController::class, 'destroy'])
             ->middleware('auth:sanctum');
     });
 
