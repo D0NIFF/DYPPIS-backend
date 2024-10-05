@@ -61,22 +61,22 @@ class ProductCategoryController extends Controller implements RestfulControllerI
      *  [POST] - Create the product
      *
      *  @param Request $request
-     *  @return Product
+     *  @return mixed
      */
-    public function store(Request $request) : Product
+    public function store(Request $request) : mixed
     {
-        return new Product();
+        return null;
     }
 
     /**
      *  [PATCH] - Update the product
      *
      *  @param string $id
-     *  @return Product
+     *  @return mixed
      */
-    public function update(string $id) : Product
+    public function update(string $id) : mixed
     {
-
+        return null;
     }
 
 
@@ -84,10 +84,10 @@ class ProductCategoryController extends Controller implements RestfulControllerI
      *  [DELETE] - Delete the product
      *
      *  @param string $id
-     *  @return void
+     *  @return mixed
      */
-    public function destroy(string $id) : Mixed
+    public function destroy(string $id) : mixed
     {
-
+        return null;
     }
 }
