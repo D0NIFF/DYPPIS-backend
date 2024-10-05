@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\ProductService;
 
+use App\Http\Controllers\Api\V1\ErrorController;
 use App\Http\Controllers\Controller;
 use App\Contracts\RestfulControllerInterface;
 use App\Http\Resources\V1\ProductService\ProductCollection;
@@ -39,15 +40,8 @@ class ProductApiController extends Controller implements RestfulControllerInterf
         try {
             $resource = Product::where('id', $id)->firstOrFail();
         }
-        catch (\Exception $e) {
-            return new JsonResponse(
-                data: [
-                    'message' => $e->getMessage(),
-                    'code' => $e->getCode(),
-                    'error' => 'Not found',
-                    ],
-                status: Response::HTTP_NOT_FOUND
-            );
+        catch (\Exception $exception) {
+            return ErrorController::notFound($exception);
         }
 
         return new ProductResource($resource);

@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Api\V1\ProductService;
 
 use App\Contracts\RestfulControllerInterface;
+use App\Http\Controllers\Api\V1\ErrorController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductService\ProductHelperController;
+
 use App\Http\Resources\V1\ProductService\PlatformCollection;
 use App\Http\Resources\V1\ProductService\PlatformResource;
 use App\Http\Resources\V1\ProductService\ProductCollection;
 use App\Models\ProductService\Platform;
-use Illuminate\Http\JsonResponse;
+
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class PlatformApiController extends Controller implements RestfulControllerInterface
 {
@@ -43,15 +44,8 @@ class PlatformApiController extends Controller implements RestfulControllerInter
             else
                 $resource = Platform::where('slug', $id)->firstOrFail();
         }
-        catch (\Exception $e) {
-            return new JsonResponse(
-                data: [
-                    'message' => $e->getMessage(),
-                    'code' => $e->getCode(),
-                    'error' => 'Not found',
-                ],
-                status: Response::HTTP_NOT_FOUND
-            );
+        catch (\Exception $exception) {
+            return ErrorController::notFound($exception);
         }
         return new PlatformResource($resource);
     }
