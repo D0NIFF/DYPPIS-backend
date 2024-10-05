@@ -11,7 +11,9 @@ use App\Http\Resources\V1\ProductService\ProductCollection;
 use App\Models\ProductService\Platform;
 use App\Models\ProductService\Product;
 use App\Models\ProductService\ProductCategory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class PlatformController extends Controller implements RestfulControllerInterface
 {
@@ -44,12 +46,14 @@ class PlatformController extends Controller implements RestfulControllerInterfac
                 $resource = Platform::where('slug', $id)->firstOrFail();
         }
         catch (\Exception $e) {
-            return response()
-                ->json([
+            return new JsonResponse(
+                data: [
                     'message' => $e->getMessage(),
                     'code' => $e->getCode(),
                     'error' => 'Not found',
-                ], 404);
+                ],
+                status: Response::HTTP_NOT_FOUND
+            );
         }
         return new PlatformResource($resource);
     }

@@ -8,8 +8,10 @@ use App\Http\Resources\V1\ProductService\ProductCategoryCollection;
 
 use App\Http\Resources\V1\ProductService\ProductCategoryResource;
 use App\Models\ProductService\ProductCategory;
-use Illuminate\Database\Eloquent\Collection;
+
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductCategoryController extends Controller implements RestfulControllerInterface
 {
@@ -42,12 +44,14 @@ class ProductCategoryController extends Controller implements RestfulControllerI
                 $resource = ProductCategory::where('slug', $id)->firstOrFail();
         }
         catch (\Exception $e) {
-            return response()
-                ->json([
+            return new JsonResponse(
+                data: [
                     'message' => $e->getMessage(),
                     'code' => $e->getCode(),
                     'error' => 'Not found',
-                ], 404);
+                ],
+                status: Response::HTTP_NOT_FOUND
+            );
         }
         return new ProductCategoryResource($resource);
     }

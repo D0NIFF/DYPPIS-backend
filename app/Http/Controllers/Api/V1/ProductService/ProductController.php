@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Api\V1\ProductService;
 use App\Http\Controllers\Controller;
 use App\Contracts\RestfulControllerInterface;
 use App\Http\Resources\V1\ProductService\ProductCollection;
+use App\Http\Resources\V1\ProductService\ProductResource;
 use App\Models\ProductService\Product;
+
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller implements RestfulControllerInterface
 {
@@ -17,13 +21,9 @@ class ProductController extends Controller implements RestfulControllerInterface
      *  @param Request $request
      *  @return ProductCollection
      */
-    public function index(Request $request) : mixed
+    public function index(Request $request) : ProductCollection
     {
-//        $result = Product::where('id', '=', '9d0c1834-2e8b-314f-aaae-7df0cafd9962')->first();
-//        $result->seller = $result->getSeller();
-//        return $result;
-
-        $products = Product::all();
+        $products = Product::paginate($request->get('perPage', 30), ['*'], 'page', $request->get('page', 1));
         return new ProductCollection($products);
     }
 
@@ -32,11 +32,25 @@ class ProductController extends Controller implements RestfulControllerInterface
      *  [GET] - Show the product by id
      *
      *  @param string $id
-     *  @return void
+     *  @return mixed
      */
-    public function show(string $id) : Mixed
+    public function show(Request $request, string $id) : mixed
     {
+        try {
+            $resource = Product::where('id', $id)->firstOrFail();
+        }
+        catch (\Exception $e) {
+            return new JsonResponse(
+                data: [
+                    'message' => $e->getMessage(),
+                    'code' => $e->getCode(),
+                    'error' => 'Not found',
+                    ],
+                status: Response::HTTP_NOT_FOUND
+            );
+        }
 
+        return new ProductResource($resource);
     }
 
 
@@ -48,6 +62,7 @@ class ProductController extends Controller implements RestfulControllerInterface
      */
     public function store(Request $request) : Product
     {
+
         return new Product();
     }
 
