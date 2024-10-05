@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\V1\ProductService;
 
-use App\Http\Requests\ProductService\FilterProductRequest;
+use App\Http\Requests\ProductService\IndexProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -32,7 +32,7 @@ class ProductCategoryResource extends JsonResource
                 'title' => $this->title,
                 'img' => $this->img,
                 'is_public' => $this->is_public,
-                'products' => new ProductCollection($this->getProducts(FilterProductRequest::create($request))),
+                'products' => new ProductCollection($this->getProducts(IndexProductRequest::create($request))),
                 'deliveries' => ($this->getDeliveries()),
             ];
         }
