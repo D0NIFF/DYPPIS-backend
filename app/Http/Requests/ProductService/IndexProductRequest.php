@@ -4,7 +4,7 @@ namespace App\Http\Requests\ProductService;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FilterProductRequest extends FormRequest
+class IndexProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
