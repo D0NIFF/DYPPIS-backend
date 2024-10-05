@@ -2,7 +2,7 @@
 
 namespace App\Models\ProductService;
 
-use App\Http\Requests\ProductService\FilterProductRequest;
+use App\Http\Requests\ProductService\IndexProductRequest;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -42,14 +42,14 @@ class ProductCategory extends Model
     /**
      *  Return all products by this category (paginate by Filters)
      *
-     *  @param FilterProductRequest $request
+     *  @param IndexProductRequest $request
      *  @return mixed
      */
-    public function getProducts(FilterProductRequest $request) : mixed
+    public function getProducts(IndexProductRequest $request) : mixed
     {
 
         return $this->hasMany(Product::class, 'category_id', 'id')
-            ->paginate($request->get('perPage', 30), ['*'], 'page', $request->get('page', 1));
+            ->paginate((int) $request->get('perPage', 30), ['*'], 'page', (int) $request->get('page', 1));
     }
 
     /**
