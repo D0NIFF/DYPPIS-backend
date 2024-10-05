@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\ProductService;
+namespace App\Http\Controllers\ProductService;
 
 use App\Http\Controllers\Controller;
+use function App\Http\Controllers\Api\V1\ProductService\_doing_it_wrong;
 
 class ProductHelperController extends Controller
 {

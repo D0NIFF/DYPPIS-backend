@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Api\V1\ProductService;
 
 use App\Contracts\RestfulControllerInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ProductService\ProductHelperController;
 use App\Http\Resources\V1\ProductService\PlatformCollection;
 use App\Http\Resources\V1\ProductService\PlatformResource;
-use App\Http\Resources\V1\ProductService\ProductCategoryResource;
 use App\Http\Resources\V1\ProductService\ProductCollection;
 use App\Models\ProductService\Platform;
-use App\Models\ProductService\Product;
-use App\Models\ProductService\ProductCategory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
