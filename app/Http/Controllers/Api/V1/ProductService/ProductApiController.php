@@ -12,7 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ProductController extends Controller implements RestfulControllerInterface
+class ProductApiController extends Controller implements RestfulControllerInterface
 {
 
     /**

@@ -5,25 +5,26 @@ namespace App\Http\Controllers\Api\V1\ProductService;
 use App\Contracts\RestfulControllerInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductService\ProductHelperController;
-use App\Http\Resources\V1\ProductService\ProductCategoryCollection;
-use App\Http\Resources\V1\ProductService\ProductCategoryResource;
-use App\Models\ProductService\ProductCategory;
+use App\Http\Resources\V1\ProductService\PlatformCollection;
+use App\Http\Resources\V1\ProductService\PlatformResource;
+use App\Http\Resources\V1\ProductService\ProductCollection;
+use App\Models\ProductService\Platform;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ProductCategoryController extends Controller implements RestfulControllerInterface
+class PlatformApiController extends Controller implements RestfulControllerInterface
 {
     /**
-     *  [GET] - Return categories
+     *  [GET] - Return platforms
      *
      *  @param Request $request
-     *  @return ProductCategoryCollection
+     *  @return ProductCollection
      */
-    public function index(Request $request) : ProductCategoryCollection
+    public function index(Request $request) : mixed
     {
-        $resource = ProductCategory::paginate((int)$request->get('perPage', 30), ['*'], 'page', (int)$request->get('page', 1));
-        return new ProductCategoryCollection($resource);
+        $products = Platform::paginate((int)$request->get('perPage', 30), ['*'], 'page', (int)$request->get('page', 1));
+        return new PlatformCollection($products);
     }
 
 
@@ -38,9 +39,9 @@ class ProductCategoryController extends Controller implements RestfulControllerI
         try {
             $resource = null;
             if(ProductHelperController::isUuid($id))
-                $resource = ProductCategory::where('id', $id)->firstOrFail();
+                $resource = Platform::where('id', $id)->firstOrFail();
             else
-                $resource = ProductCategory::where('slug', $id)->firstOrFail();
+                $resource = Platform::where('slug', $id)->firstOrFail();
         }
         catch (\Exception $e) {
             return new JsonResponse(
@@ -52,7 +53,7 @@ class ProductCategoryController extends Controller implements RestfulControllerI
                 status: Response::HTTP_NOT_FOUND
             );
         }
-        return new ProductCategoryResource($resource);
+        return new PlatformResource($resource);
     }
 
 
