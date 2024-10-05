@@ -12,7 +12,7 @@ class ProductHelperController extends Controller
         if ( is_numeric( $version ) )
         {
             if ( 4 !== (int) $version ) {
-                Log::alert('Only UUID V4 is supported at this time. 4.9.0');
+                // Log::alert('Only UUID V4 is supported at this time. 4.9.0');
                 return false;
             }
             $regex = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/';
