@@ -22,7 +22,11 @@ class ProductResource extends JsonResource
             'description' => $this->description,
             'price' => $this->price,
             'old_price' => $this->old_price,
+            'discount' => $this->getDiscount(),
             'seller' => new UserResource($this->getSeller()),
+            'platform' => $this->getPlatform(),
+            'category' => $this->getCategory(),
+            'delivery' => $this->getDelivery(),
         ];
     }
 }
