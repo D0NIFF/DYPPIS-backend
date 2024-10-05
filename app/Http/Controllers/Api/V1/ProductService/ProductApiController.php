@@ -5,13 +5,12 @@ namespace App\Http\Controllers\Api\V1\ProductService;
 use App\Http\Controllers\Api\V1\ErrorController;
 use App\Http\Controllers\Controller;
 use App\Contracts\RestfulControllerInterface;
+use App\Http\Controllers\ProductService\ProductController;
 use App\Http\Resources\V1\ProductService\ProductCollection;
 use App\Http\Resources\V1\ProductService\ProductResource;
 use App\Models\ProductService\Product;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class ProductApiController extends Controller implements RestfulControllerInterface
 {
@@ -32,6 +31,7 @@ class ProductApiController extends Controller implements RestfulControllerInterf
     /**
      *  [GET] - Show the product by id
      *
+     *  @param Request $request
      *  @param string $id
      *  @return mixed
      */
@@ -43,7 +43,7 @@ class ProductApiController extends Controller implements RestfulControllerInterf
         catch (\Exception $exception) {
             return ErrorController::notFound($exception);
         }
-
+        $resource->discount = ProductController::getDiscount($resource->price, $resource->old_price);
         return new ProductResource($resource);
     }
 
