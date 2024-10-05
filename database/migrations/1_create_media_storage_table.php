@@ -11,23 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('image_files', function (Blueprint $table) {
+        Schema::create('media_storage', function (Blueprint $table) {
             $table->uuid('id')
                 ->primary();
 
-            $table->string('file_name')
+            $table->string('file_path', 255)
                 ->nullable();
-            $table->string('file_path')
-                ->nullable();
-            $table->string('file_url')
-                ->nullable();
-            $table->string('file_type')
-                ->nullable();
-            $table->string('file_size')
+            $table->string('file_url', 355)
                 ->nullable();
 
-            $table->timestamp('created_at')
-                ->useCurrent();
+            /* Example: image/jpeg, image/png, video/mp4  */
+            $table->string('file_type')
+                ->nullable();
+            $table->unsignedInteger('file_size')
+                ->nullable();
+
+            $table->timestamps();
         });
     }
 
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('image_files');
+        Schema::dropIfExists('media_storage');
     }
 };

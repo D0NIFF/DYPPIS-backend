@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\V1\ProductService;
 
+use App\Http\Requests\ProductService\FilterProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -12,16 +13,29 @@ class ProductCategoryResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray(Request $request, $isColletion = false): array
     {
-        return [
-            'slug' => $this->slug,
-            'title' => $this->title,
-            'img' => $this->img,
-            'is_public' => $this->is_public,
-            'test' => $request->get('filters'),
-            'products' => new ProductCollection($this->getProducts($request)),
-            'deliveries' => ($this->getDeliveries()),
-        ];
+        if($isColletion)
+        {
+            return [
+                'slug' => $this->slug,
+                'title' => $this->title,
+                'img' => $this->img,
+                'is_public' => $this->is_public,
+                'deliveries' => ($this->getDeliveries()),
+            ];
+        }
+        else
+        {
+            return [
+                'slug' => $this->slug,
+                'title' => $this->title,
+                'img' => $this->img,
+                'is_public' => $this->is_public,
+                'products' => new ProductCollection($this->getProducts(FilterProductRequest::create($request))),
+                'deliveries' => ($this->getDeliveries()),
+            ];
+        }
+
     }
 }

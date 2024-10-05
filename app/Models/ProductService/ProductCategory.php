@@ -2,11 +2,11 @@
 
 namespace App\Models\ProductService;
 
-use App\Models\User;
+use App\Http\Requests\ProductService\FilterProductRequest;
+
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Http\Request;
+
 use Laravel\Scout\Searchable;
 
 class ProductCategory extends Model
@@ -42,19 +42,20 @@ class ProductCategory extends Model
     /**
      *  Return all products by this category (paginate by Filters)
      *
-     *  @param Request $request
-     *  @return \Illuminate\Database\Eloquent\Collection
+     *  @param FilterProductRequest $request
+     *  @return mixed
      */
-    public function getProducts(Request $request) : Collection
+    public function getProducts(FilterProductRequest $request) : mixed
     {
+
         return $this->hasMany(Product::class, 'category_id', 'id')
-            ->get();
+            ->paginate($request->get('perPage', 30), ['*'], 'page', $request->get('page', 1));
     }
 
     /**
      *  Return all deliveries by this category
      *
-     *  @return \Illuminate\Database\Eloquent\Collection
+     *  @return Collection
      */
     public function getDeliveries() : Collection
     {

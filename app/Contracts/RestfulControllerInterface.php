@@ -20,7 +20,15 @@ interface RestfulControllerInterface
      *  @param string $id
      *  @return mixed
      */
-    public function show(string $id) : mixed;
+//    public function show(string $id) : mixed;
+
+    /**
+     *  [GET] - Return the <element> by id
+     *
+     *  @param string $id
+     *  @return mixed
+     */
+    public function show(Request $request, string $id) : mixed;
 
     /**
      *  [POST] - Create the <element>

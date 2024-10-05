@@ -14,6 +14,14 @@ class ProductCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'items' => $this->collection,
+            'count' => $this->count(),
+            'pagination' => [
+                'per_page' => $this->perPage(),
+                'next_page_url' => $this->nextPageUrl(),
+                'prev_page_url' => $this->previousPageUrl(),
+            ]
+        ];
     }
 }
