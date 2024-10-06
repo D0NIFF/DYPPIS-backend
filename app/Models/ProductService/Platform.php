@@ -2,9 +2,11 @@
 
 namespace App\Models\ProductService;
 
+use App\Http\Controllers\ProductService\ProductController;
 use App\Http\Requests\ProductService\IndexProductRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Request;
 
 class Platform extends Model
 {
@@ -50,13 +52,12 @@ class Platform extends Model
     /**
      *  Return product with paginate
      *
-     *  @param IndexProductRequest $request
+     *  @param Request $request
      *  @return mixed
      */
-    public function getProducts(IndexProductRequest $request) : mixed
+    public function getProducts(Request $request) : mixed
     {
-        return $this->hasMany(Product::class, 'platform_id')
-            ->paginate((int) $request->get('perPage', 30), ['*'], 'page', (int) $request->get('page', 1));
+        return ProductController::getPlatformProducts($this, $request);
     }
 
 
