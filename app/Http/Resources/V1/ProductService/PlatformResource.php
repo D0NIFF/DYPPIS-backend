@@ -33,7 +33,7 @@ class PlatformResource extends JsonResource
                 'title' => $this->title,
                 'img' => $this->img,
                 'banner' => $this->banner,
-                'products' => new ProductCollection($this->getProducts(IndexProductRequest::create($request))),
+                'products' => new ProductCollection($this->getProducts($request)),
                 'categories' => ($this->getCategories()),
             ];
         }
