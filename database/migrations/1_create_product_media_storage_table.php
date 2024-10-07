@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('media_storage', function (Blueprint $table) {
+        Schema::create('product_media_storage', function (Blueprint $table) {
             $table->uuid('id')
                 ->primary();
 
-            $table->string('file_path', 255)
-                ->nullable();
-            $table->string('file_url', 355)
+            $table->string('file_name', 255)
                 ->nullable();
 
             /* Example: image/jpeg, image/png, video/mp4  */
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('media_storage');
+        Schema::dropIfExists('product_media_storage');
     }
 };
