@@ -20,10 +20,19 @@ return new class extends Migration
 
             $table->string('title', 150);
 
-            $table->string('img', 150);
-            $table->string('banner', 150);
-            $table->uuid('type_id');
+            $table->uuid('image_id')
+                ->nullable();
+            $table->foreign('image_id')
+                ->references('id')
+                ->on('product_media_storage');
 
+            $table->uuid('banner_id')
+                ->nullable();
+            $table->foreign('banner_id')
+                ->references('id')
+                ->on('product_media_storage');
+
+            $table->uuid('type_id');
             $table->foreign('type_id')
                 ->references('id')
                 ->on('platform_types');
