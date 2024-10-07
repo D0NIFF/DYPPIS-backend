@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\ProductService;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductService\IndexProductRequest;
 use App\Models\ProductService\Platform;
 use App\Models\ProductService\Product;
 use Illuminate\Http\Request;
+
+use \Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ProductController extends Controller
 {
@@ -27,7 +28,41 @@ class ProductController extends Controller
     }
 
 
-    public static function getPlatformProducts(Platform $platform, Request $request)
+    /**
+     *  Return the products with filters
+     *
+     *  @param Request $request
+     *  @return LengthAwarePaginator
+     */
+    public static function getProductsWithFilters(Request $request) : LengthAwarePaginator
+    {
+        $response = Product::where('deleted_at', '=', null);
+
+        if ($request->get('filters') != null && $request->get('filters') != 'null')
+        {
+            $response = self::filterProducts($request->get('filters'), $response);
+        }
+
+        /*
+         *  Sort the records, if sets 'sort'
+         */
+        if($request->get('sort') != null && $request->get('sort') != 'null')
+        {
+            $response = $response->orderBy($request->get('sort'), $request->get('orderBy', 'desc'));
+        }
+
+        return $response->paginate($request->get('perPage', 30),  ['*'], 'page', $request->get('page', 1));
+    }
+
+
+    /**
+     *  Return the products for the platform
+     *
+     *  @param Platform $platform
+     *  @param Request $request
+     *  @return LengthAwarePaginator
+     */
+    public static function getPlatformProducts(Platform $platform, Request $request) : LengthAwarePaginator
     {
         $response = $platform->hasMany(Product::class, 'platform_id', 'id')
             ->where('deleted_at', '=', null);
@@ -48,10 +83,13 @@ class ProductController extends Controller
         return $response->paginate($request->get('perPage', 30),  ['*'], 'page', $request->get('page', 1));
     }
 
+
     /**
-     * @param mixed $filters
-     * @param $response
-     * @return mixed
+     *  Filtering the products by $filters
+     *
+     *  @param mixed $filters
+     *  @param $response
+     *  @return mixed
      */
     public static function filterProducts(array $filters, $response): mixed
     {
@@ -85,8 +123,9 @@ class ProductController extends Controller
             unset($filters['discount']);
         }
 
-        if ($filters != null && count($filters) > 0) {
-
+        if ($filters != null && count($filters) > 0)
+        {
+            /* TODO: realize filter by product custom details */
         }
         return $response;
     }
