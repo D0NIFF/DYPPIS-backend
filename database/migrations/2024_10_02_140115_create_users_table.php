@@ -24,8 +24,11 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            $table->string('avatar')
+            $table->uuid('avatar_id')
                 ->nullable();
+            $table->foreign('avatar_id')
+                ->references('id')
+                ->on('user_media_storage');
 
             $table->decimal('balance')
                 ->default(0);

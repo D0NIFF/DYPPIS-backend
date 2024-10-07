@@ -32,6 +32,11 @@ return new class extends Migration
             $table->foreign('language_id')
                 ->references('id')
                 ->on('languages');
+
+            $table->uuid('image_id');
+            $table->foreign('image_id')
+                ->references('id')
+                ->on('product_media_storage');
         });
     }
 

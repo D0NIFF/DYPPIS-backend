@@ -20,8 +20,10 @@ return new class extends Migration
             $table->string('code')
                 ->unique();
 
-            $table->string('img')
-                ->nullable();
+            $table->uuid('image_id');
+            $table->foreign('image_id')
+                ->references('id')
+                ->on('product_media_storage');
         });
     }
 

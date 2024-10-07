@@ -20,7 +20,11 @@ return new class extends Migration
 
             $table->jsonb('title');
 
-            $table->string('img', 150);
+            $table->uuid('image_id')
+                ->nullable();
+            $table->foreign('image_id')
+                ->references('id')
+                ->on('product_media_storage');
 
             $table->boolean('is_public')
                 ->default(false);
