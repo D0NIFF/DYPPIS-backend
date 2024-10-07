@@ -40,7 +40,6 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Spiele',
                 'ru' => 'Игры'
             ],
-            'img' => 'games.svg'
         ],
         [
             'slug' => 'software',
@@ -51,10 +50,9 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Software',
                 'ru' => 'Программное обеспечение'
             ],
-            'img' => 'software.svg'
         ],
         [
-            'slug' => 'socials_apps',
+            'slug' => 'socials-apps',
             'title' => [
                 'en' => 'Social networks & apps',
                 'fr' => 'Réseaux sociaux et apps',
@@ -62,10 +60,9 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Soziale Netzwerke und Apps',
                 'ru' => 'Соцсети и сервисы'
             ],
-            'img' => 'socials_apps.svg'
         ],
         [
-            'slug' => 'mobile_games',
+            'slug' => 'mobile-games',
             'title' => [
                 'en' => 'Mobile games',
                 'fr' => 'Jeux mobiles',
@@ -73,57 +70,39 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Mobile Spiele',
                 'ru' => 'Мобильные игры'
             ],
-            'img' => 'mobile_games.svg'
         ],
     ];
+
     private static $productPlatforms = [
         [
             'id' => '1aadf6d8-fed8-4896-b4f3-11b9ac98fad9',
             'slug' => 'clash_of_clans',
             'title' => 'Clash of Clans',
-            'img' => 'clash_of_clans.svg',
-            'banner' => 'clash_of_clans.jpg',
-            //'type_id' => 4
         ],
         [
             'id' => '2aadf6d8-fed8-4896-b4f3-11b9ac98fad9',
             'slug' => 'clash_royale',
             'title' => 'Clash Royale',
-            'img' => 'clash_royale.svg',
-            'banner' => 'clash_royale.jpg',
-            //'type_id' => 4
         ],
         [
             'id' => '3aadf6d8-fed8-4896-b4f3-11b9ac98fad9',
             'slug' => 'steam',
             'title' => 'Steam',
-            'img' => 'steam.svg',
-            'banner' => 'steam.jpg',
-            //'type_id' => 3
         ],
         [
             'id' => '4aadf6d8-fed8-4896-b4f3-11b9ac98fad9',
             'slug' => 'epic_games',
             'title' => 'Epic games',
-            'img' => 'epic_games.svg',
-            'banner' => 'epic_games.jpg',
-            //'type_id' => 3
         ],
         [
             'id' => '5aadf6d8-fed8-4896-b4f3-11b9ac98fad9',
             'slug' => 'adobe_photoshop',
             'title' => 'Adobe Photoshop',
-            'img' => 'adobe_photoshop.svg',
-            'banner' => 'adobe_photoshop.jpg',
-            //'type_id' => 2
         ],
         [
             'id' => '6aadf6d8-fed8-4896-b4f3-11b9ac98fad9',
             'slug' => 'figma',
             'title' => 'Figma',
-            'img' => 'figma.svg',
-            'banner' => 'figma.jpg',
-            //'type_id' => 2
         ],
     ];
     private static $productCategories = [
@@ -137,7 +116,6 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Konto',
                 'ru' => 'Аккаунт'
             ],
-            'img' => 'account.svg',
             'is_public' => 1
         ],
         [
@@ -150,7 +128,6 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Lizenzschlüssel',
                 'ru' => 'Лицензионный ключ'
             ],
-            'img' => 'license_key.svg',
             'is_public' => 1
         ],
         [
@@ -163,7 +140,6 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Geschenk',
                 'ru' => 'Подарок'
             ],
-            'img' => 'gift.svg',
             'is_public' => 1
         ],
         [
@@ -176,7 +152,6 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Dienst',
                 'ru' => 'Услуга'
             ],
-            'img' => 'service.svg',
             'is_public' => 1
         ],
         [
@@ -189,7 +164,6 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Boost',
                 'ru' => 'Буст'
             ],
-            'img' => 'boost.svg',
             'is_public' => 1
         ],
     ];
@@ -336,22 +310,19 @@ class DatabaseSeeder extends Seeder
         }
         foreach (self::$productPlatforms as $value)
         {
-            $type = DB::table('platform_types')->where('slug', 'mobile_games')->first();
-            //$value['id'] = fake()->uuid();
+            $type = DB::table('platform_types')->where('slug', 'mobile-games')->first();
             $value['type_id'] = $type->id;
             DB::table('platforms')
                 ->insert($value);
         }
         foreach (self::$productCategories as $value)
         {
-            //$value['id'] = fake()->uuid();
             $value['title'] = json_encode($value['title']);
             DB::table('product_categories')
                 ->insert($value);
         }
         foreach (self::$productDeliveries as $value)
         {
-            //$value['id'] = fake()->uuid();
             $value['title'] = json_encode($value['title']);
             $value['description'] = json_encode($value['description']);
             DB::table('product_deliveries')
