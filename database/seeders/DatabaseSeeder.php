@@ -293,6 +293,25 @@ class DatabaseSeeder extends Seeder
         ],
     ];
 
+    /**
+     *  @return void
+     */
+    private static function fillUserRoles() : void
+    {
+        $titles = ['Moderator', 'Administrator', 'ROOT'];
+        for ($i = 1; $i <= 3; $i++) {
+            DB::table('user_roles')->insert([
+                'id' => $i,
+                'title' => $titles[($i - 1)]
+            ]);
+        }
+    }
+
+    /**
+     *  Fill db tables
+     *
+     *  @return void
+     */
     private static function runLocals() : void
     {
         foreach (self::$currencies as $value)
@@ -345,6 +364,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        self::fillUserRoles();
         User::factory(100)->create();
 
         self::runLocals();

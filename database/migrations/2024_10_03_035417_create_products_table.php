@@ -49,6 +49,9 @@ return new class extends Migration
                 ->references('id')
                 ->on('product_deliveries');
 
+            $table->unsignedInteger('views')
+                ->default(0);
+
             $table->timestamps();
             $table->softDeletes();
         });

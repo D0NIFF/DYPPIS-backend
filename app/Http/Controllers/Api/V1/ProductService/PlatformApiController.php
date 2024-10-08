@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\ErrorController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductService\ProductHelperController;
 
+use App\Http\Requests\ProductService\StorePlatformRequest;
 use App\Http\Resources\V1\ProductService\PlatformCollection;
 use App\Http\Resources\V1\ProductService\PlatformResource;
 use App\Http\Resources\V1\ProductService\ProductCollection;
@@ -20,9 +21,9 @@ class PlatformApiController extends Controller implements RestfulControllerInter
      *  [GET] - Return platforms
      *
      *  @param Request $request
-     *  @return ProductCollection
+     *  @return PlatformCollection
      */
-    public function index(Request $request) : mixed
+    public function index(Request $request) : PlatformCollection
     {
         $products = Platform::paginate((int)$request->get('perPage', 30), ['*'], 'page', (int)$request->get('page', 1));
         return new PlatformCollection($products);
@@ -30,8 +31,9 @@ class PlatformApiController extends Controller implements RestfulControllerInter
 
 
     /**
-     *  [GET] - Show the product by id
+     *  [GET] - Show the platform by id
      *
+     *  @param Request $request
      *  @param string $id
      *  @return mixed
      */
@@ -52,18 +54,23 @@ class PlatformApiController extends Controller implements RestfulControllerInter
 
 
     /**
-     *  [POST] - Create the product
+     *  [POST] - Create the platform
      *
      *  @param Request $request
      *  @return mixed
      */
     public function store(Request $request) : mixed
     {
+        $storeRequest = new StorePlatformRequest((array)$request);
+        if(\Auth::check() && \Auth::user()->role_id === 2)
+        {
+            echo "try";
+        }
         return null;
     }
 
     /**
-     *  [PATCH] - Update the product
+     *  [PATCH] - Update the platform
      *
      *  @param string $id
      *  @return mixed
@@ -75,7 +82,7 @@ class PlatformApiController extends Controller implements RestfulControllerInter
 
 
     /**
-     *  [DELETE] - Delete the product
+     *  [DELETE] - Delete the platform
      *
      *  @param string $id
      *  @return mixed

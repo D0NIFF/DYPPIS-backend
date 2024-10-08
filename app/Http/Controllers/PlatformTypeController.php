@@ -14,7 +14,7 @@ class PlatformTypeController extends Controller
         /*
          *  Save cache 1 year
          */
-        return Cache::remember('platformType', self::$secondsToDay * 365, function () {
+        return Cache::remember('platform-types', self::$secondsToDay * 365, function () {
             return PlatformType::all()
                 ->pluck('slug')
                 ->toArray();

@@ -30,6 +30,12 @@ return new class extends Migration
                 ->references('id')
                 ->on('user_media_storage');
 
+            $table->unsignedBigInteger('role_id')
+                ->default(1);
+            $table->foreign('role_id')
+                ->references('id')
+                ->on('user_roles');
+
             $table->decimal('balance')
                 ->default(0);
 

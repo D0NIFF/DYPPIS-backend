@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\ProductService\PlatformApiController;
+use App\Http\Controllers\Api\V1\ProductService\PlatformTypeApiController;
 use App\Http\Controllers\Api\V1\ProductService\ProductCategoryApiController;
 use App\Http\Controllers\Api\V1\ProductService\ProductApiController;
 use App\Http\Controllers\Auth\PersonalAccessTokenController;
@@ -29,6 +30,10 @@ Route::prefix('v1')->group(function () {
 
         Route::post('/login', [PersonalAccessTokenController::class, 'store']);
         Route::post('/personal-access-tokens', [PersonalAccessTokenController::class, 'store']);
+    });
+
+    Route::prefix('platform-types')->group(function () {
+        Route::get('/{field}', [PlatformTypeApiController::class, 'index']);
     });
 
     Route::prefix('platforms')->group(function () {
