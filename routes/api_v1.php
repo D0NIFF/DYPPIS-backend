@@ -28,8 +28,11 @@ Route::prefix('v1')->group(function () {
      */
     Route::prefix('auth')->group(function () {
 
-        Route::post('/login', [PersonalAccessTokenController::class, 'store']);
+        Route::post('/authorization', [PersonalAccessTokenController::class, 'store']);
+
         Route::post('/personal-access-tokens', [PersonalAccessTokenController::class, 'store']);
+        Route::delete('/personal-access-tokens', [PersonalAccessTokenController::class, 'destroy'])
+            ->middleware('auth:sanctum');
     });
 
     Route::prefix('platform-types')->group(function () {

@@ -11,6 +11,13 @@ use Illuminate\Validation\ValidationException;
 
 class PersonalAccessTokenController extends Controller
 {
+
+    /**
+     *
+     *
+     *  @param StoreUserRequest $request
+     *  @return array
+     */
     public function store(StoreUserRequest $request)
     {
         $user = User::where('email', $request->email)->first();
@@ -22,5 +29,16 @@ class PersonalAccessTokenController extends Controller
         }
 
         return ['token' => $user->createToken($request->device_name)->plainTextToken];
+    }
+
+
+    public function destroy(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response([
+            'status' => 'Success',
+            'message' => 'Token removido com sucesso!',
+        ], 204);
+
     }
 }

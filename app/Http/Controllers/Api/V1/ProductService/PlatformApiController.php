@@ -56,17 +56,25 @@ class PlatformApiController extends Controller implements RestfulControllerInter
     /**
      *  [POST] - Create the platform
      *
-     *  @param Request $request
+     *  @param StorePlatformRequest|Request $request
      *  @return mixed
      */
-    public function store(Request $request) : mixed
+    public function store(StorePlatformRequest|Request $request) : mixed
     {
-        $storeRequest = new StorePlatformRequest((array)$request);
-        if(\Auth::check() && \Auth::user()->role_id === 2)
+        if(\Auth::check() && \Auth::user()->role_id >= 3)
         {
-            echo "try";
+            return response()
+                ->json(['message' => $request->get('title')], 201);
         }
-        return null;
+        else
+        {
+            return response()
+                ->header('Accept', 'application/json')
+                ->json([
+                    'success' => false,
+                ]);
+        }
+        //return null;
     }
 
     /**

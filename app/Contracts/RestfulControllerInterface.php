@@ -2,6 +2,7 @@
 
 namespace App\Contracts;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
 interface RestfulControllerInterface
@@ -15,16 +16,17 @@ interface RestfulControllerInterface
      */
     public function index(Request $request) : mixed;
 
+
     /**
      *  [GET] - Return the <resource> by id
      *  Display the specified resource.
      *
-     * @param Request $request
-     * @param string $id
-     * @return mixed
+     *  @param Request $request
+     *  @param string $id
+     *  @return mixed
      */
-
     public function show(Request $request, string $id) : mixed;
+
 
     /**
      *  [POST] - Create the <resource>
@@ -34,6 +36,7 @@ interface RestfulControllerInterface
      *  @return mixed
      */
     public function store(Request $request) : mixed;
+
 
     /**
      *  [PATCH] - Update the <resource>
