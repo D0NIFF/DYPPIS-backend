@@ -21,6 +21,8 @@ return new class extends Migration
             /* Example: image/jpeg, image/png, video/mp4  */
             $table->string('file_type')
                 ->nullable();
+
+            /* In bytes */
             $table->unsignedInteger('file_size')
                 ->nullable();
 
