@@ -13,7 +13,7 @@ class StorePlatformRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,9 +26,9 @@ class StorePlatformRequest extends FormRequest
         return [
             'slug' => 'required|string|unique:platforms,slug',
             'title' => 'required|string',
-            'image_id' => 'required|uuid|exists:images,id',
-            'banner_id' => 'required|uuid|exists:images,id',
-            'type_id' => 'required|uuid|exists:product_types,id',
+            'image_id' => 'required|uuid|exists:product_media_storage,id',
+            'banner_id' => 'required|uuid|exists:product_media_storage,id',
+            'type_id' => 'required|uuid|exists:platform_types,id',
         ];
     }
 
@@ -40,15 +40,21 @@ class StorePlatformRequest extends FormRequest
     {
         return [
             'slug.required' => ErrorMessageController::fieldRequired('slug'),
+            'slug.unique' => ErrorMessageController::fieldUnique('slug'),
 
             'title.required' => ErrorMessageController::fieldRequired('title'),
 
             'image_id.required' => ErrorMessageController::fieldRequired('image_id'),
+            'image_id.uuid' => ErrorMessageController::fieldUuid('image_id'),
+            'image_id.exists' => ErrorMessageController::fieldExists('image_id'),
 
             'type_id.required' => ErrorMessageController::fieldRequired('type_id'),
+            'type_id.uuid' => ErrorMessageController::fieldUuid('type_id'),
+            'type_id.exists' => ErrorMessageController::fieldExists('type_id'),
 
             'banner_id.required' => ErrorMessageController::fieldRequired('banner_id'),
-
+            'banner_id.uuid' => ErrorMessageController::fieldUuid('banner_id'),
+            'banner_id.exists' => ErrorMessageController::fieldExists('banner_id'),
         ];
     }
 }
