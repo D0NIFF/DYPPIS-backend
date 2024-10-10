@@ -8,9 +8,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ErrorController extends Controller
 {
-    public function index()
+    public function index(string $message = "", \Exception $exception = null) : JsonResponse
     {
-
+        return new JsonResponse(
+            data: [
+                'message' => $exception->getMessage(),
+                'code' => $exception->getCode(),
+                'error' => $message,
+            ],
+            status: Response::HTTP_NOT_FOUND
+        );
     }
 
     /**
