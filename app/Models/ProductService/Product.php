@@ -45,6 +45,12 @@ class Product extends Model
             ->first();
     }
 
+    public function getPictures() : mixed
+    {
+        return $this->belongsToMany(ProductMediaStorage::class, 'product_pictures', 'product_id', 'image_id')
+            ->get();
+    }
+
     /**
      *  Return the product platform
      *
