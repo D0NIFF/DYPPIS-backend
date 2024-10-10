@@ -21,7 +21,11 @@ return new class extends Migration
                 ->references('id')
                 ->on('products');
 
-            $table->string('img', 150);
+            $table->uuid('image_id');
+            $table->foreign('image_id')
+                ->references('id')
+                ->on('product_media_storage');
+
             $table->timestamp('created_at')
                 ->default(now());
         });
