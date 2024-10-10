@@ -26,8 +26,8 @@ class StorePlatformRequest extends FormRequest
         return [
             'slug' => 'required|string|unique:platforms,slug',
             'title' => 'required|string',
-            'image_id' => 'required|uuid|exists:product_media_storage,id',
-            'banner_id' => 'required|uuid|exists:product_media_storage,id',
+            'image' => 'required|uuid|exists:product_media_storage,id',
+            'banner' => 'required|uuid|exists:product_media_storage,id',
             'type_id' => 'required|uuid|exists:platform_types,id',
         ];
     }
