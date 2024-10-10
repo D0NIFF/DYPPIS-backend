@@ -10,12 +10,11 @@ use App\Http\Controllers\ProductService\ProductHelperController;
 use App\Http\Requests\ProductService\StorePlatformRequest;
 use App\Http\Resources\V1\ProductService\PlatformCollection;
 use App\Http\Resources\V1\ProductService\PlatformResource;
-use App\Http\Resources\V1\ProductService\ProductCollection;
 use App\Models\ProductService\Platform;
 
 use Illuminate\Http\Request;
 
-class PlatformApiController extends Controller implements RestfulControllerInterface
+class PlatformApiController extends Controller
 {
     /**
      *  [GET] - Return platforms
@@ -56,20 +55,23 @@ class PlatformApiController extends Controller implements RestfulControllerInter
     /**
      *  [POST] - Create the platform
      *
-     *  @param StorePlatformRequest|Request $request
+     *  @param StorePlatformRequest $request
      *  @return mixed
      */
-    public function store(StorePlatformRequest|Request $request) : mixed
+    public function store(StorePlatformRequest $request) : mixed
     {
+//        $request->validate([
+//            'title' => 'required',
+//        ]);
+
         if(\Auth::check() && \Auth::user()->role_id >= 3)
         {
             return response()
-                ->json(['message' => $request->get('title')], 201);
+                ->json(['message' => 'test'], 201);
         }
         else
         {
             return response()
-                ->header('Accept', 'application/json')
                 ->json([
                     'success' => false,
                 ]);
