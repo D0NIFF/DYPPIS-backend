@@ -24,7 +24,7 @@ return new class extends Migration
             $table->uuid('image_id');
             $table->foreign('image_id')
                 ->references('id')
-                ->on('product_media_storage');
+                ->on('media_storage');
 
             $table->timestamp('created_at')
                 ->default(now());

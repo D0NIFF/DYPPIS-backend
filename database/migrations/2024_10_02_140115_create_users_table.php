@@ -28,7 +28,7 @@ return new class extends Migration
                 ->nullable();
             $table->foreign('avatar_id')
                 ->references('id')
-                ->on('user_media_storage');
+                ->on('media_storage');
 
             $table->unsignedBigInteger('role_id')
                 ->default(1);

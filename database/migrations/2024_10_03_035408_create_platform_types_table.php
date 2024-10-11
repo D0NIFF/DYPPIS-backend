@@ -24,7 +24,7 @@ return new class extends Migration
                 ->nullable();
             $table->foreign('image_id')
                 ->references('id')
-                ->on('product_media_storage');
+                ->on('media_storage');
         });
     }
 
