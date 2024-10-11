@@ -11,7 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_media_storage', function (Blueprint $table) {
+        Schema::create('media_storage_categories', function (Blueprint $table) {
+            $table->uuid('id')
+                ->primary();
+
+            $table->string('title');
+
+            $table->string('path');
+        });
+
+        Schema::create('media_storage', function (Blueprint $table) {
             $table->uuid('id')
                 ->primary();
 
@@ -26,6 +35,11 @@ return new class extends Migration
             $table->unsignedInteger('file_size')
                 ->nullable();
 
+            $table->uuid('category_id');
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('media_storage_categories');
+
             $table->timestamps();
         });
     }
@@ -35,6 +49,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_media_storage');
+        Schema::dropIfExists('media_storage');
+        Schema::dropIfExists('media_storage_categories');
     }
 };
