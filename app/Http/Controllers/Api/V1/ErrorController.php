@@ -39,4 +39,34 @@ class ErrorController extends Controller
     }
 
 
+    /**
+     *  Return json response that bad request
+     *
+     *  @param \Exception $exception
+     *  @return JsonResponse
+     */
+    public static function badRequest(\Exception $exception) : JsonResponse
+    {
+        return new JsonResponse(
+            data: [
+                'message' => $exception->getMessage(),
+                'code' => $exception->getCode(),
+                'error' => 'Bad Request',
+            ],
+            status: Response::HTTP_BAD_REQUEST
+        );
+    }
+
+
+    public static function unauthorized(\Exception $exception = null) : JsonResponse
+    {
+        return new JsonResponse(
+            data: [
+                'message' => $exception->getMessage(),
+                'code' => $exception->getCode(),
+                'error' => 'User not authorized',
+            ],
+            status: Response::HTTP_UNAUTHORIZED
+        );
+    }
 }
