@@ -10,6 +10,33 @@ use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
+    private static $mediaStorageCategories = [
+        [
+            'id' => '06295c29-d7da-41e7-97df-40ffde284a93',
+            'title' => 'Avatar',
+            'path' => '/storage/uploads/images/avatars'
+        ],
+        [
+            'id' => '16295c29-d7da-41e7-97df-40ffde284a93',
+            'title' => 'Banner',
+            'path' => '/storage/uploads/images/banners'
+        ],
+        [
+            'id' => '26295c29-d7da-41e7-97df-40ffde284a93',
+            'title' => 'Flag',
+            'path' => '/storage/uploads/images/flags'
+        ],
+        [
+            'id' => '36295c29-d7da-41e7-97df-40ffde284a93',
+            'title' => 'Icon',
+            'path' => '/storage/uploads/images/icons'
+        ],
+        [
+            'id' => '46295c29-d7da-41e7-97df-40ffde284a93',
+            'title' => 'Product background',
+            'path' => '/storage/uploads/images/products'
+        ],
+    ];
     private static $currencies = [
         [
             'code' => 'USD',
@@ -72,7 +99,6 @@ class DatabaseSeeder extends Seeder
             ],
         ],
     ];
-
     private static $productPlatforms = [
         [
             'id' => '1aadf6d8-fed8-4896-b4f3-11b9ac98fad9',
@@ -314,6 +340,11 @@ class DatabaseSeeder extends Seeder
      */
     private static function runLocals() : void
     {
+        foreach (self::$mediaStorageCategories as $value)
+        {
+            DB::table('media_storage_categories')
+                ->insert($value);
+        }
         foreach (self::$currencies as $value)
         {
             $value['id'] = fake()->uuid();
