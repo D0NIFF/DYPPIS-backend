@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'DYPPIS'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,8 +65,8 @@ return [
     |
     */
 
-    'images' => env('APP_IMAGES', '/storage/images/'),
-    'texts' => env('APP_TEXTS', '/storage/texts/'),
+    'path_images' => env('PATH_IMAGES', '/storage/images'),
+    'path_icons' => env('PATH_ICONS', '/storage/images/icons'),
 
     /*
     |--------------------------------------------------------------------------
