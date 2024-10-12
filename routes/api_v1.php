@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\V1\MediaStorageApiController;
 use App\Http\Controllers\Api\V1\ProductService\PlatformApiController;
 use App\Http\Controllers\Api\V1\ProductService\PlatformTypeApiController;
-use App\Http\Controllers\Api\V1\ProductService\ProductCategoryApiController;
 use App\Http\Controllers\Api\V1\ProductService\ProductApiController;
+use App\Http\Controllers\Api\V1\ProductService\ProductCategoryApiController;
 use App\Http\Controllers\Auth\PersonalAccessTokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,16 @@ Route::prefix('v1')->group(function () {
         Route::get('/{field}', [PlatformTypeApiController::class, 'index']);
     });
 
+    Route::prefix('media-storage')->group(function () {
+
+        Route::get('/', [MediaStorageApiController::class, 'index']);
+        Route::post('/', [MediaStorageApiController::class, 'store'])
+            ->middleware('auth:sanctum');
+        Route::put('/', [MediaStorageApiController::class, 'update']);
+        Route::patch('/', [MediaStorageApiController::class, 'update']);
+        Route::delete('/', [MediaStorageApiController::class, 'destroy']);
+    });
+
     Route::prefix('platforms')->group(function () {
 
         Route::get('/', [PlatformApiController::class, 'index']);
@@ -50,19 +61,6 @@ Route::prefix('v1')->group(function () {
         Route::patch('/{id}', [PlatformApiController::class, 'update'])
             ->middleware('auth:sanctum');
         Route::delete('/{id}', [PlatformApiController::class, 'destroy'])
-            ->middleware('auth:sanctum');
-    });
-
-
-    Route::prefix('products')->group(function () {
-
-        Route::get('/', [ProductApiController::class, 'index']);
-        Route::get('/{id}', [ProductApiController::class, 'show']);
-        Route::post('/', [ProductApiController::class, 'store'])
-            ->middleware('auth:sanctum');
-        Route::patch('/{product_id}', [ProductApiController::class, 'update'])
-            ->middleware('auth:sanctum');
-        Route::delete('/{product_id}', [ProductApiController::class, 'destroy'])
             ->middleware('auth:sanctum');
     });
 
@@ -79,5 +77,19 @@ Route::prefix('v1')->group(function () {
         Route::delete('/{id}', [ProductCategoryApiController::class, 'destroy'])
             ->middleware('auth:sanctum');
     });
+
+    Route::prefix('products')->group(function () {
+
+        Route::get('/', [ProductApiController::class, 'index']);
+        Route::get('/{id}', [ProductApiController::class, 'show']);
+        Route::post('/', [ProductApiController::class, 'store'])
+            ->middleware('auth:sanctum');
+        Route::patch('/{product_id}', [ProductApiController::class, 'update'])
+            ->middleware('auth:sanctum');
+        Route::delete('/{product_id}', [ProductApiController::class, 'destroy'])
+            ->middleware('auth:sanctum');
+    });
+
+
 
 });
