@@ -4,7 +4,7 @@ namespace App\Http\Requests\ProductService;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProductMediaStorageRequest extends FormRequest
+class StoreMediaStorageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class StoreProductMediaStorageRequest extends FormRequest
     {
         return [
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'icon' => 'boolean'
+            'category_id' => 'required|uuid'
         ];
     }
 }
