@@ -3,10 +3,10 @@
 namespace App\Models\ProductService;
 
 use App\Http\Controllers\ProductService\ProductController;
+use App\Models\MediaStorage;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
@@ -47,7 +47,7 @@ class Product extends Model
 
     public function getPictures() : mixed
     {
-        return $this->belongsToMany(ProductMediaStorage::class, 'product_pictures', 'product_id', 'image_id')
+        return $this->belongsToMany(MediaStorage::class, 'product_pictures', 'product_id', 'image_id')
             ->get();
     }
 
