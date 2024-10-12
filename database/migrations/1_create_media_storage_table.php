@@ -15,9 +15,9 @@ return new class extends Migration
             $table->uuid('id')
                 ->primary();
 
-            $table->string('title');
+            $table->string('title', 100);
 
-            $table->string('path');
+            $table->string('path', 255);
         });
 
         Schema::create('media_storage', function (Blueprint $table) {
@@ -35,7 +35,8 @@ return new class extends Migration
             $table->unsignedInteger('file_size')
                 ->nullable();
 
-            $table->uuid('category_id');
+            $table->uuid('category_id')
+                ->nullable();
             $table->foreign('category_id')
                 ->references('id')
                 ->on('media_storage_categories');
