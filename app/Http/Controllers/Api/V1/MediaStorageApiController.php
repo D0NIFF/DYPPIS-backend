@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\ProductService;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductService\StoreProductMediaStorageRequest;
-use App\Models\ProductService\ProductMediaStorage;
+use App\Http\Requests\ProductService\StoreMediaStorageRequest;
+use App\Models\MediaStorage;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class ProductMediaStorageApiController extends Controller
+class MediaStorageApiController extends Controller
 {
     use HasUuids;
 
@@ -24,23 +24,25 @@ class ProductMediaStorageApiController extends Controller
     /**
      *  Store a newly created resource in storage.
      *
-     *  @param StoreProductMediaStorageRequest $request
+     *  @param StoreMediaStorageRequest $request
      */
-    public function store(StoreProductMediaStorageRequest $request)
+    public function store(StoreMediaStorageRequest $request)
     {
         $fileInfo = [
             'id' => Str::uuid()->toString(),
             'file_name' => time() . "_" . $request->file('image')->getClientOriginalName(),
             'file_type' => $request->file('image')->getMimeType(),
             'file_size' => $request->file('image')->getSize(),
+            'category_id' => $request->category_id,
+            'created_at' => now(),
         ];
 
-        $filePath = "";
-        if($request->get('icon') == null || $request->get('icon') == false)
-            $filePath = public_path() . config('app.path_images') . '/products/';
-        else
-            $filePath = public_path() . config('app.path_icons') . '/';
+        /* Image category */
+        $category = \DB::table('media_storage_categories')
+            ->where('id', $request->category_id)
+            ->first();
 
+        $filePath = public_path() . $category->path;
 
         if($request->hasFile('image'))
         {
@@ -48,7 +50,7 @@ class ProductMediaStorageApiController extends Controller
             $file->move($filePath, $fileInfo["file_name"]);
         }
 
-        ProductMediaStorage::insert($fileInfo);
+        \DB::table('media_storage')->insert($fileInfo);
 
         return response()
             ->json([
