@@ -23,7 +23,9 @@ class ResponseController extends Controller
                 'message' => 'Resource saved successfully.',
                 'data' => $data,
             ],
-            status: Response::HTTP_OK
+            status: $code
         );
     }
+
+
 }
