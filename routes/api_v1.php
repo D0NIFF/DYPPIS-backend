@@ -5,27 +5,37 @@ use App\Http\Controllers\Api\V1\ProductService\PlatformApiController;
 use App\Http\Controllers\Api\V1\ProductService\PlatformTypeApiController;
 use App\Http\Controllers\Api\V1\ProductService\ProductApiController;
 use App\Http\Controllers\Api\V1\ProductService\ProductCategoryApiController;
+use App\Http\Controllers\Api\V1\UserService\UserApiController;
 use App\Http\Controllers\Auth\PersonalAccessTokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
 
+
+    /**
+     *  USER Restful operations
+     */
     Route::prefix('users')->group(function () {
 
-        /**
-         * TEST ROUTE
-         */
-        Route::get('/', function (Request $request) {
-            $users = \App\Models\User::all();
-            //$users = \Illuminate\Support\Facades\DB::table('users')->get();
-            return response()->json($users);
-        })->middleware('auth:sanctum');
+        Route::get('/', [UserApiController::class, 'index']);
+        Route::get('/{id}', [UserApiController::class, 'index']);
+        Route::post('/', [UserApiController::class, 'store']);
+        Route::put('/{id}', [UserApiController::class, 'update']);
+        Route::patch('/{id}', [UserApiController::class, 'update']);
+        Route::delete('/{id}', [UserApiController::class, 'destroy']);
     });
+
+    /**
+     * TEST ROUTE
+     */
+    Route::get('/test', function (Request $request) {
+        return Auth::user();
+    })->middleware('auth:sanctum');
 
 
     /**
-     *  AUTH ROUTES
+     *  AUTH routes
      */
     Route::prefix('auth')->group(function () {
 
@@ -36,10 +46,17 @@ Route::prefix('v1')->group(function () {
             ->middleware('auth:sanctum');
     });
 
+    /**
+     *  Platform type routes
+     */
     Route::prefix('platform-types')->group(function () {
         Route::get('/{field}', [PlatformTypeApiController::class, 'index']);
     });
 
+
+    /**
+     *  Media-Storage restful operations
+     */
     Route::prefix('media-storage')->group(function () {
 
         Route::get('/', [MediaStorageApiController::class, 'index']);
@@ -50,6 +67,9 @@ Route::prefix('v1')->group(function () {
         Route::delete('/', [MediaStorageApiController::class, 'destroy']);
     });
 
+    /**
+     *  Platforms restful operations
+     */
     Route::prefix('platforms')->group(function () {
 
         Route::get('/', [PlatformApiController::class, 'index']);
@@ -64,6 +84,10 @@ Route::prefix('v1')->group(function () {
             ->middleware('auth:sanctum');
     });
 
+
+    /**
+     *  Categories restful operations
+     */
     Route::prefix('categories')->group(function () {
 
         Route::get('/', [ProductCategoryApiController::class, 'index']);
@@ -78,6 +102,10 @@ Route::prefix('v1')->group(function () {
             ->middleware('auth:sanctum');
     });
 
+
+    /**
+     *  Products restful operations
+     */
     Route::prefix('products')->group(function () {
 
         Route::get('/', [ProductApiController::class, 'index']);
