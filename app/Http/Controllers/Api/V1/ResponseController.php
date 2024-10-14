@@ -14,7 +14,7 @@ class ResponseController extends Controller
 
     }
 
-    public static function success(array $data = [], int $code = 200) : JsonResponse
+    public static function successCreated(array $data = [], int $code = Response::HTTP_CREATED) : JsonResponse
     {
         return new \Illuminate\Http\JsonResponse(
             data: [
@@ -22,6 +22,18 @@ class ResponseController extends Controller
                 'status' => 'success',
                 'message' => 'Resource saved successfully.',
                 'data' => $data,
+            ],
+            status: $code
+        );
+    }
+
+    public static function successDeleted(int $code = Response::HTTP_NO_CONTENT) : JsonResponse
+    {
+        return new \Illuminate\Http\JsonResponse(
+            data: [
+                'code' => $code,
+                'status' => 'success',
+                'message' => 'Resource deleted successfully.',
             ],
             status: $code
         );
