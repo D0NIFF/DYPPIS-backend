@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Response;
 
 class PlatformApiController extends Controller
 {
@@ -38,11 +39,10 @@ class PlatformApiController extends Controller
     /**
      *  [GET] - Show the platform by id
      *
-     *  @param Request $request
      *  @param string $id
      *  @return mixed
      */
-    public function show(Request $request, string $id) : mixed
+    public function show(string $id) : mixed
     {
         try {
             $resource = null;
@@ -126,7 +126,7 @@ class PlatformApiController extends Controller
                 try {
                     Platform::insert($platform);
                     Log::info('Create a new platform {id} by {user_id}', ['id' => $platform['id'], 'user_id' => \Auth::id()]);
-                    return ResponseController::success($platform, 201);
+                    return ResponseController::successCreated($platform);
                 }
                 catch (\Exception $exception) {
                     return ErrorController::badRequest($exception);
@@ -174,6 +174,7 @@ class PlatformApiController extends Controller
      */
     public function destroy(string $id) : mixed
     {
-        return null;
+        Platform::destroy($id);
+        return ResponseController::successDeleted();
     }
 }
