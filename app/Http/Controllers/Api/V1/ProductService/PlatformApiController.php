@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1\ProductService;
 
-use App\Contracts\RestfulControllerInterface;
 use App\Http\Controllers\Api\V1\ErrorController;
 use App\Http\Controllers\Api\V1\ResponseController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductService\ProductHelperController;
 
 use App\Http\Requests\ProductService\StorePlatformRequest;
-use App\Http\Requests\ProductService\StoreMediaStorageRequest;
+use App\Http\Requests\ProductService\UpdatePlatformRequest;
 use App\Http\Resources\V1\ProductService\PlatformCollection;
 use App\Http\Resources\V1\ProductService\PlatformResource;
 use App\Models\ProductService\Platform;
@@ -19,7 +18,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\Response;
 
 class PlatformApiController extends Controller
 {
@@ -157,12 +155,29 @@ class PlatformApiController extends Controller
     /**
      *  [PATCH] - Update the platform
      *
+     *  @param UpdatePlatformRequest $request
      *  @param string $id
      *  @return mixed
      */
-    public function update(string $id) : mixed
+    public function update(UpdatePlatformRequest $request, string $id) : mixed
     {
-        return null;
+        try {
+            $platform = Platform::where('id', $id)
+                ->firstOrFail()
+                ->toArray();
+        }
+        catch (\Exception $exception) {
+            return ErrorController::notFound($exception);
+        }
+
+        foreach ($request->all() as $key => $value)
+        {
+            $platform[$key] = $value;
+        }
+
+        Platform::where('id', $id)
+            ->update($platform);
+        return ResponseController::successUpdated($platform);
     }
 
 
