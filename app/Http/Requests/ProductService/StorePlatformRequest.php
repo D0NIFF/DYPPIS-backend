@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\ProductService;
 
-use App\Http\Controllers\Api\V1\ErrorMessageController;
+use App\Http\Controllers\Api\V1\RequestFormMessageController;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePlatformRequest extends FormRequest
@@ -39,22 +39,22 @@ class StorePlatformRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'slug.required' => ErrorMessageController::fieldRequired('slug'),
-            'slug.unique' => ErrorMessageController::fieldUnique('slug'),
+            'slug.required' => RequestFormMessageController::fieldRequired('slug'),
+            'slug.unique' => RequestFormMessageController::fieldUnique('slug'),
 
-            'title.required' => ErrorMessageController::fieldRequired('title'),
+            'title.required' => RequestFormMessageController::fieldRequired('title'),
 
-            'image_id.required' => ErrorMessageController::fieldRequired('image_id'),
-            'image_id.uuid' => ErrorMessageController::fieldUuid('image_id'),
-            'image_id.exists' => ErrorMessageController::fieldExists('image_id'),
+            'image_id.required' => RequestFormMessageController::fieldRequired('image_id'),
+            'image_id.uuid' => RequestFormMessageController::fieldUuid('image_id'),
+            'image_id.exists' => RequestFormMessageController::fieldExists('image_id'),
 
-            'type_id.required' => ErrorMessageController::fieldRequired('type_id'),
-            'type_id.uuid' => ErrorMessageController::fieldUuid('type_id'),
-            'type_id.exists' => ErrorMessageController::fieldExists('type_id'),
+            'type_id.required' => RequestFormMessageController::fieldRequired('type_id'),
+            'type_id.uuid' => RequestFormMessageController::fieldUuid('type_id'),
+            'type_id.exists' => RequestFormMessageController::fieldExists('type_id'),
 
-            'banner_id.required' => ErrorMessageController::fieldRequired('banner_id'),
-            'banner_id.uuid' => ErrorMessageController::fieldUuid('banner_id'),
-            'banner_id.exists' => ErrorMessageController::fieldExists('banner_id'),
+            'banner_id.required' => RequestFormMessageController::fieldRequired('banner_id'),
+            'banner_id.uuid' => RequestFormMessageController::fieldUuid('banner_id'),
+            'banner_id.exists' => RequestFormMessageController::fieldExists('banner_id'),
         ];
     }
 }
