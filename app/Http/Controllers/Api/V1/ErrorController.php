@@ -12,8 +12,8 @@ class ErrorController extends Controller
     {
         return new JsonResponse(
             data: [
-                'message' => $exception->getMessage(),
                 'code' => $exception->getCode(),
+                'message' => $exception->getMessage(),
                 'error' => $message,
             ],
             status: Response::HTTP_NOT_FOUND
@@ -24,17 +24,20 @@ class ErrorController extends Controller
      *  Return json response that resource not found
      *
      *  @param \Exception $exception
+     *  @param int $code
      *  @return JsonResponse
      */
-    public static function notFound(\Exception $exception) : JsonResponse
+    public static function notFound(\Exception $exception, int $code = Response::HTTP_NOT_FOUND) : JsonResponse
     {
+        $errorMessage = 'Error code: ' . $exception->getCode() . '<br> Message: ' . $exception->getMessage();
         return new JsonResponse(
             data: [
-                'message' => $exception->getMessage(),
-                'code' => $exception->getCode(),
+                'code' => $code,
+                'status' => 'fail',
+                'message' => $errorMessage,
                 'error' => 'Not found',
             ],
-            status: Response::HTTP_NOT_FOUND
+            status: $code
         );
     }
 
@@ -43,30 +46,42 @@ class ErrorController extends Controller
      *  Return json response that bad request
      *
      *  @param \Exception $exception
+     *  @param int $code
      *  @return JsonResponse
      */
-    public static function badRequest(\Exception $exception) : JsonResponse
+    public static function badRequest(\Exception $exception, int $code = Response::HTTP_BAD_REQUEST) : JsonResponse
     {
+        $errorMessage = 'Error code: ' . $exception->getCode() . '<br> Message: ' . $exception->getMessage();
         return new JsonResponse(
             data: [
-                'message' => $exception->getMessage(),
-                'code' => $exception->getCode(),
+                'code' => $code,
+                'status' => 'fail',
+                'message' => $errorMessage,
                 'error' => 'Bad Request',
             ],
-            status: Response::HTTP_BAD_REQUEST
+            status: $code
         );
     }
 
 
-    public static function unauthorized(\Exception $exception = null) : JsonResponse
+    /**
+     *  Return json response that user not authorized
+     *
+     *  @param \Exception|null $exception
+     *  @param int $code
+     *  @return JsonResponse
+     */
+    public static function unauthorized(\Exception $exception = null, int $code = Response::HTTP_UNAUTHORIZED) : JsonResponse
     {
+        $errorMessage = 'Error code: ' . $exception->getCode() . '<br> Message: ' . $exception->getMessage();
         return new JsonResponse(
             data: [
-                'message' => $exception->getMessage(),
-                'code' => $exception->getCode(),
+                'code' => $code,
+                'status' => 'fail',
+                'message' => $errorMessage,
                 'error' => 'User not authorized',
             ],
-            status: Response::HTTP_UNAUTHORIZED
+            status: $code
         );
     }
 }
