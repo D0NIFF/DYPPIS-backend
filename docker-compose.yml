@@ -12,18 +12,16 @@ services:
         ports:
             - "2727:5432"
 
-    redis:
-        container_name: dyppis_redis
+    cache:
         image: redis:latest
         restart: always
         ports:
             - "6379:6379"
+        command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
         volumes:
-            - 'redis_data:/bitnami/redis/data'
-        environment:
-            - REDIS_PASSWORD=
-            - REDIS_PORT=6379
-            - REDIS_DATABASES=dyppis
+            - cache:/data
 
 volumes:
     postgres-data:
+    cache:
+        driver: local
