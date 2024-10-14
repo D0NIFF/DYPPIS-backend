@@ -39,5 +39,17 @@ class ResponseController extends Controller
         );
     }
 
+    public static function successUpdated(array $data = [], int $code = Response::HTTP_OK) : JsonResponse
+    {
+        return new \Illuminate\Http\JsonResponse(
+            data: [
+                'code' => $code,
+                'status' => 'success',
+                'message' => 'Resource saved successfully.',
+                'data' => $data,
+            ],
+            status: $code
+        );
+    }
 
 }
