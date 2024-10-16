@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Api\V1\ProductService;
 
 use App\Http\Controllers\Api\V1\ErrorController;
+use App\Http\Controllers\Api\V1\ResponseController;
 use App\Http\Controllers\Controller;
-use App\Contracts\RestfulControllerInterface;
 use App\Http\Controllers\ProductService\ProductController;
+use App\Http\Requests\ProductService\StoreProductRequest;
 use App\Http\Resources\V1\ProductService\ProductCollection;
 use App\Http\Resources\V1\ProductService\ProductResource;
 use App\Models\ProductService\Product;
 
 use Illuminate\Http\Request;
 
-class ProductApiController extends Controller implements RestfulControllerInterface
+class ProductApiController extends Controller
 {
 
     /**
@@ -51,12 +52,13 @@ class ProductApiController extends Controller implements RestfulControllerInterf
     /**
      *  [POST] - Create the product
      *
-     *  @param Request $request
+     *  @param StoreProductRequest $request
      *  @return mixed
      */
-    public function store(Request $request) : mixed
+    public function store(StoreProductRequest $request) : mixed
     {
-        return null;
+        $product = Product::create($request->validated());
+        return ResponseController::successCreated($product);
     }
 
     /**
