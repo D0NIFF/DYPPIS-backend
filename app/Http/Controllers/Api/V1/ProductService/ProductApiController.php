@@ -79,6 +79,7 @@ class ProductApiController extends Controller implements RestfulControllerInterf
      */
     public function destroy(string $id) : mixed
     {
+        Product::destroy($id);
         return null;
     }
 }
