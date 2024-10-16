@@ -29,6 +29,7 @@ class PlatformApiController extends Controller
      */
     public function index(Request $request) : PlatformCollection
     {
+        /* TODO: Realize filters system */
         $products = Platform::paginate((int)$request->get('perPage', 30), ['*'], 'page', (int)$request->get('page', 1));
         return new PlatformCollection($products);
     }
