@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\MediaStorage;
 use App\Models\ProductService\Product;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -37,6 +38,40 @@ class DatabaseSeeder extends Seeder
             'path' => '/storage/uploads/images/products'
         ],
     ];
+//    private static $mediaStorageImages = [
+//        [
+//            'id' => '16236c29-d7da-41e9-97df-40ffde284a93',
+//            'file_name' => 'games-icon.svg',
+//            'file_type' => 'image/svg',
+//            'file_size' => 2096,
+//            'category_id' => '36295c29-d7da-41e7-97df-40ffde284a93',
+//            'created_at' => now(),
+//        ],
+//        [
+//            'id' => '26236c29-d7da-41e9-97df-40ffde284a93',
+//            'file_name' => 'software-icon.svg',
+//            'file_type' => 'image/svg',
+//            'file_size' => 2096,
+//            'category_id' => '36295c29-d7da-41e7-97df-40ffde284a93',
+//            'created_at' => now(),
+//        ],
+//        [
+//            'id' => '36236c29-d7da-41e9-97df-40ffde284a93',
+//            'file_name' => 'social-apps-icon.svg',
+//            'file_type' => 'image/svg',
+//            'file_size' => 2096,
+//            'category_id' => '36295c29-d7da-41e7-97df-40ffde284a93',
+//            'created_at' => now(),
+//        ],
+//        [
+//            'id' => '46236c29-d7da-41e9-97df-40ffde284a93',
+//            'file_name' => 'mobile-games-icon.svg',
+//            'file_type' => 'image/svg',
+//            'file_size' => 2096,
+//            'category_id' => '36295c29-d7da-41e7-97df-40ffde284a93',
+//            'created_at' => now(),
+//        ],
+//    ];
     private static $currencies = [
         [
             'code' => 'USD',
@@ -67,6 +102,7 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Spiele',
                 'ru' => 'Игры'
             ],
+            'image_id' => '16236c29-d7da-41e9-97df-40ffde284a93',
         ],
         [
             'slug' => 'software',
@@ -77,6 +113,7 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Software',
                 'ru' => 'Программное обеспечение'
             ],
+            'image_id' => '26236c29-d7da-41e9-97df-40ffde284a93',
         ],
         [
             'slug' => 'socials-apps',
@@ -87,6 +124,7 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Soziale Netzwerke und Apps',
                 'ru' => 'Соцсети и сервисы'
             ],
+            'image_id' => '36236c29-d7da-41e9-97df-40ffde284a93',
         ],
         [
             'slug' => 'mobile-games',
@@ -97,6 +135,7 @@ class DatabaseSeeder extends Seeder
                 'de' => 'Mobile Spiele',
                 'ru' => 'Мобильные игры'
             ],
+            'image_id' => '46236c29-d7da-41e9-97df-40ffde284a93',
         ],
     ];
     private static $productPlatforms = [
@@ -395,12 +434,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        self::fillUserRoles();
-        User::factory(100)->create();
-
-        self::runLocals();
-
-        Product::factory(50)->create();
+//        self::fillUserRoles();
+//        User::factory(100)->create();
+//
+//        self::runLocals();
+//
+//        Product::factory(50)->create();
 
     }
 }

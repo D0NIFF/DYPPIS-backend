@@ -12,14 +12,14 @@ services:
         ports:
             - "2727:5432"
 
-    cache:
-        image: redis:latest
-        restart: always
-        ports:
-            - "6379:6379"
-        command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
-        volumes:
-            - cache:/data
+#    cache:
+#        image: redis:latest
+#        restart: always
+#        ports:
+#            - "6379:6379"
+#        command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+#        volumes:
+#            - cache:/data
 
 volumes:
     postgres-data:
