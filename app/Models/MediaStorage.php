@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MediaStorage extends Model
 {
+    protected $table = 'media_storage';
     protected $fillable = [
         'id',
         'file_name',
