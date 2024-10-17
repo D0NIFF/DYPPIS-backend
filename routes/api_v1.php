@@ -51,6 +51,7 @@ Route::prefix('v1')->group(function () {
      */
     Route::prefix('platform-types')->group(function () {
         Route::get('/{field}', [PlatformTypeApiController::class, 'index']);
+        Route::get('/', [PlatformTypeApiController::class, 'index']);
     });
 
 
