@@ -1,11 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\ProductService;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Log;
-
-class ProductHelperController extends Controller
+class ValidateController extends Controller
 {
     public static function isUuid(string $uuid, $version = null) : bool
     {
