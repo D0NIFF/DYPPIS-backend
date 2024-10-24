@@ -62,10 +62,15 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/', [MediaStorageApiController::class, 'index']);
         Route::post('/', [MediaStorageApiController::class, 'store'])
+            ->middleware('auth:sanctum')
+            ->name('media-storage.post');
+        Route::put('/', [MediaStorageApiController::class, 'update'])
             ->middleware('auth:sanctum');
-        Route::put('/', [MediaStorageApiController::class, 'update']);
-        Route::patch('/', [MediaStorageApiController::class, 'update']);
-        Route::delete('/', [MediaStorageApiController::class, 'destroy']);
+        Route::patch('/', [MediaStorageApiController::class, 'update'])
+            ->middleware('auth:sanctum');
+        Route::delete('/', [MediaStorageApiController::class, 'destroy'])
+            ->middleware('auth:sanctum')
+            ->name('media-storage.delete');
     });
 
     /**
