@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+    postgres:
+        container_name: dyppis_postgres
+        image: postgres:latest
+        environment:
+            POSTGRES_DB: "dyppis"
+            POSTGRES_USER: "postgres"
+            POSTGRES_PASSWORD: "postgres"
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        ports:
+            - "2727:5432"
+    redis:
+        container_name: "dyppis_redis"
+        image: redis
+        ports:
+            - "6379:6379"
+
+volumes:
+    postgres-data:
+    redis-data:
+    cache:
+        driver: local

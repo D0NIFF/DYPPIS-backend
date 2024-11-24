@@ -1,0 +1,14 @@
+{
+    "field.required": {
+        "en": "The '{field}' field is required.",
+        "es": "El campo '{field}' es obligatorio.",
+        "de": "Das Feld '{field}' ist erforderlich.",
+        "fr": "Le champ '{field}' est obligatoire.",
+        "it": "Il campo '{field}' è obbligatorio.",
+        "ru": "Поле '{field}' обязательно для заполнения."
+    },
+    "field.integer": {
+        "en": "The field must be an integer.",
+        "ru": "Поле должно быть целым числом."
+    }
+}
