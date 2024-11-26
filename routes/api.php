@@ -22,12 +22,18 @@ Route::prefix('v1')->group(function () {
         Route::delete('/{id}', [MediaStorageController::class, 'destroy']);
     });
 
-
+    /**
+     *  Platforms types
+     */
     Route::get('/platform-types', [PlatformTypeApiController::class, 'index']);
     Route::get('/platform-types/{id}', [PlatformTypeApiController::class, 'show']);
 
+    /**
+     *  Platforms
+     */
     Route::get('/platform-types/{id}/platforms', [PlatformApiController::class, 'index']);
     Route::get('/platforms/{id}', [PlatformApiController::class, 'show']);
 
+    //Route::get('/platforms/{id}', [PlatformApiController::class, 'show']);
 
 });
