@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Api\V1\ProductService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProductCategoryController extends Controller
+class ProductApiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, string $id = null, string $categoryId = null)
     {
         //
     }
