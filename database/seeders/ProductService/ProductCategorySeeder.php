@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\ProductService;
 
+use App\Models\MediaStorage\MediaStorage;
 use App\Models\ProductService\ProductCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -124,6 +125,7 @@ class ProductCategorySeeder extends Seeder
             ],
         ];
 
+        MediaStorage::insert($mediaStorageImages);
         foreach ($categories as $category)
         {
             $category['title'] = json_encode($category['title'], JSON_UNESCAPED_UNICODE);
