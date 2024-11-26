@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\MediaStorageController;
 use App\Http\Controllers\Api\V1\ProductService\PlatformTypeApiController;
 use App\Http\Controllers\Api\V1\ProductService\PlatformApiController;
 use App\Http\Controllers\Api\V1\ProductService\ProductCategoryApiController;
+use App\Http\Controllers\Api\V1\UserService\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,10 @@ Route::prefix('v1')->group(function () {
         return 'Test route';
     });
 
+    /**
+     *  Users
+     */
+    Route::get('/users/{id}', [UserController::class, 'show']);
 
     Route::prefix('media-storage')->group(function () {
         Route::get('/{id}', [MediaStorageController::class, 'show']);
