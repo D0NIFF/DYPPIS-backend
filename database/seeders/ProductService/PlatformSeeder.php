@@ -133,7 +133,6 @@ class PlatformSeeder extends Seeder
         ];
 
         MediaStorage::insert($mediaStorageImages);
-        //Platform::insert($platforms);
         foreach ($platforms as $value)
         {
             Platform::insert($value);
