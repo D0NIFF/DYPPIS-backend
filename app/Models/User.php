@@ -3,14 +3,20 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\MediaStorage\MediaStorage;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
+
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +24,17 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'id',
+        'nickname',
         'email',
         'password',
+        'balance',
+        'avatar_id',
+        'role',
+        'rating',
+        'seo_source',
+        'ip_address',
+        'email_verified_at',
     ];
 
     /**
@@ -30,6 +44,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'balance',
         'remember_token',
     ];
 
@@ -44,5 +59,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function avatar(): BelongsTo
+    {
+        return $this->belongsTo(MediaStorage::class, 'avatar_id');
     }
 }
