@@ -74,22 +74,22 @@ class PlatformApiController extends Controller
     /**
      * Display the specified resource.
      *
-     *  @param string $platformTypeId
-     *  @param string $id
-     *  @return PlatformResource
-     *  @throws NotFoundException
+     * @param string $id
+     * @return PlatformResource
+     * @throws NotFoundException
      */
-    public function show(string $id): PlatformResource
+    public function show(string $id)
     {
-        $platform = Platform::with(['image', 'banner']);
+        $field = 'slug';
 
         if (UuidHelper::isUuid($id))
-            $platform->where('id', $id);
-        else
-            $platform->where('slug', $id);
+            $field = 'id';
 
         try {
-            $platform = $platform->firstOrFail();
+            $platform = Platform::with(['image', 'banner', 'categories'])
+                ->where($field, $id)
+                ->first();
+            //return ($platform);
             return new PlatformResource($platform);
         }
         catch (\Exception $exception)
