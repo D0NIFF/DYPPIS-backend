@@ -8,20 +8,25 @@ use App\Http\Resources\ProductService\PlatformCollection;
 use App\Http\Resources\ProductService\PlatformResource;
 use App\Models\ProductService\Platform;
 use App\Models\ProductService\PlatformType;
+use App\Utils\ApiResponse;
 use App\Utils\UuidHelper;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PlatformApiController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     *  Display a listing of the resource.
      *
-     * @return PlatformCollection
+     *  @param Request $request
+     *  @param string $id
+     *  @return PlatformCollection
+     *  @throws NotFoundException
      */
-    public function index(Request $request, string $id)
+    public function index(Request $request, string $id): PlatformCollection
     {
         $platformType = PlatformType::query();
-
         if(UuidHelper::isUuid($id))
             $platformType->where('id', $id);
         else
@@ -29,11 +34,9 @@ class PlatformApiController extends Controller
 
         try {
             $platformType = $platformType->firstOrFail();
-
-            $perPage = $request->get('perPage', 10); // Количество записей на страницу
             $platforms = Platform::with(['image', 'banner'])
                 ->where('type_id', $platformType->id)
-                ->paginate($perPage);
+                ->paginate($request->get('perPage', 10));
             return new PlatformCollection($platforms);
         }
         catch (\Exception $exception)
@@ -44,20 +47,15 @@ class PlatformApiController extends Controller
                 'details' => 'The requested platform type ID does not exist in the database.',
             ]);
         }
-//        $perPage = $request->get('perPage', 10); // Количество записей на страницу
-//        $platforms = Platform::with(['image', 'banner'])
-//            ->paginate($perPage);
-//        return new PlatformCollection($platforms);
-
     }
 
     /**
-     * Store a newly created resource in storage.
+     *  Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     *  @param Request $request
+     *  @return Response|PlatformResource
      */
-    public function store(Request $request)
+    public function store(Request $request): Response|PlatformResource
     {
         $request->validate([
             'slug' => 'required|string|unique:platforms,slug|max:100',
@@ -72,16 +70,15 @@ class PlatformApiController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     *  Display the specified resource.
      *
-     * @param string $id
-     * @return PlatformResource
-     * @throws NotFoundException
+     *  @param string $id
+     *  @return PlatformResource
+     *  @throws NotFoundException
      */
-    public function show(string $id)
+    public function show(string $id): PlatformResource
     {
         $field = 'slug';
-
         if (UuidHelper::isUuid($id))
             $field = 'id';
 
@@ -89,7 +86,6 @@ class PlatformApiController extends Controller
             $platform = Platform::with(['image', 'banner', 'categories'])
                 ->where($field, $id)
                 ->first();
-            //return ($platform);
             return new PlatformResource($platform);
         }
         catch (\Exception $exception)
@@ -103,13 +99,13 @@ class PlatformApiController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     *  Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Platform  $platform
-     * @return \Illuminate\Http\Response
+     *  @param Request $request
+     *  @param Platform $platform
+     *  @return PlatformResource
      */
-    public function update(Request $request, Platform $platform)
+    public function update(Request $request, Platform $platform) : PlatformResource
     {
         $request->validate([
             'slug' => 'required|string|unique:platforms,slug,' . $platform->id . '|max:100',
@@ -124,14 +120,14 @@ class PlatformApiController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     *  Remove the specified resource from storage.
      *
-     * @param  \App\Models\Platform  $platform
-     * @return \Illuminate\Http\Response
+     *  @param string $id
+     *  @return JsonResponse
      */
-    public function destroy(Platform $platform)
+    public function destroy(string $id): JsonResponse
     {
-        $platform->delete();
-        return response()->noContent();
+        Platform::destroy($id);
+        return ApiResponse::deleted();
     }
 }
