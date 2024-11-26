@@ -24,7 +24,7 @@ class ProductCategoryCollection extends ResourceCollection
                     'title' => $platform->title,
                     'image' => $platform->image ? new MediaStorageResource($platform->image) : null,
                 ];
-            }),
+            })
         ];
     }
 }
