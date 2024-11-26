@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\MediaStorageController;
 use App\Http\Controllers\Api\V1\ProductService\PlatformTypeApiController;
 use App\Http\Controllers\Api\V1\ProductService\PlatformApiController;
+use App\Http\Controllers\Api\V1\ProductService\ProductCategoryApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/platform-types/{id}/platforms', [PlatformApiController::class, 'index']);
     Route::get('/platforms/{id}', [PlatformApiController::class, 'show']);
 
-    //Route::get('/platforms/{id}', [PlatformApiController::class, 'show']);
+    Route::get('/platforms/{id}/categories', [ProductCategoryApiController::class, 'index']);
+    Route::get('/categories', [ProductCategoryApiController::class, 'index']);
 
 });
