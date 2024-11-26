@@ -23,6 +23,7 @@ class PlatformResource extends JsonResource
             'image' => $this->image ? new MediaStorageResource($this->image) : null,
             'banner' => $this->banner ? new MediaStorageResource($this->banner) : null,
             'type' => $this->type ? new PlatformTypeResource($this->type) : null,
+            'categories' => $this->categories //? new ProductCategoryCollection($this->categories) : null,
         ];
     }
 }
