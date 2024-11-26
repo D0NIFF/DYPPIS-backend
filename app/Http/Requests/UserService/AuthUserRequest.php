@@ -21,7 +21,7 @@ class AuthUserRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             //'name' => 'required|string|max:255',
@@ -31,16 +31,14 @@ class AuthUserRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages() : array
     {
-        $errorMessages = new ErrorMessages();
-
         return [
-            'name.required' => $errorMessages->getMessages('field.required', 'name'),
-            'email.required' => $errorMessages->getMessages('field.required', 'email'),
-            'email.email' => $errorMessages->getMessages('field.email', 'name'),
-            'password.required' => $errorMessages->getMessages('field.required', 'password'),
-            'device_name.required' => $errorMessages->getMessages('field.required', 'device_name'),
+            'name.required' => ErrorMessages::getMessages('field.required', 'name'),
+            'email.required' => ErrorMessages::getMessages('field.required', 'email'),
+            'email.email' => ErrorMessages::getMessages('field.email', 'name'),
+            'password.required' => ErrorMessages::getMessages('field.required', 'password'),
+            'device_name.required' => ErrorMessages::getMessages('field.required', 'device_name'),
         ];
     }
 }
