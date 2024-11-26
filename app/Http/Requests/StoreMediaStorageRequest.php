@@ -30,11 +30,9 @@ class StoreMediaStorageRequest extends FormRequest
 
     public function messages(): array
     {
-        $errorMessages = new ErrorMessages();
-
         return [
-            'file.required' => $errorMessages->getMessages('field.required', 'file'),
-            'category_id.required' => $errorMessages->getMessages('field.required', 'category_id'),
+            'file.required' => ErrorMessages::getMessages('field.required', 'file'),
+            'category_id.required' => ErrorMessages::getMessages('field.required', 'category_id'),
         ];
     }
 }
