@@ -23,16 +23,23 @@ class StoreMediaStorageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => 'required|file|mimes:jpeg,jpg,png|max:2000',
-            'category_id' => 'required|uuid|exists:media_storage_categories,id'
+            'file' => ['required', 'file', 'mimes:jpeg,jpg,png,svg', 'max:5120'],
+            'category_id' => ['required', 'uuid', 'exists:media_storage_categories,id'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'file.required' => ErrorMessages::getMessages('field.required', 'file'),
-            'category_id.required' => ErrorMessages::getMessages('field.required', 'category_id'),
+            /* file field */
+            'file.required' => ErrorMessages::generate('field.required', ['field' => 'File']),
+            'file.file' => ErrorMessages::generate('field.file', ['field' => 'File']),
+            'file.mimes' => ErrorMessages::generate('field.mimes', ['mimes' => 'jpeg, jpg, png, svg']),
+            'file.max' => ErrorMessages::generate('file.max', ['count' => '5']),
+
+            /* category_id field */
+            'category_id.required' => ErrorMessages::generate('field.required', ['field' => 'Category']),
+            'category_id.exists' => ErrorMessages::generate('field.exists'),
         ];
     }
 }

@@ -24,21 +24,21 @@ class AuthUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'password' => 'required',
-            'device_name' => 'required',
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+            'device_name' => ['nullable', 'string'],
         ];
     }
 
     public function messages() : array
     {
         return [
-            'name.required' => ErrorMessages::getMessages('field.required', 'name'),
-            'email.required' => ErrorMessages::getMessages('field.required', 'email'),
-            'email.email' => ErrorMessages::getMessages('field.email', 'name'),
-            'password.required' => ErrorMessages::getMessages('field.required', 'password'),
-            'device_name.required' => ErrorMessages::getMessages('field.required', 'device_name'),
+            /* email field */
+            'email.required' => ErrorMessages::generate('field.required', ['field' => 'E-mail']),
+            'email.email' => ErrorMessages::generate('field.email', ['field' => 'E-mail']),
+
+            /* password field */
+            'password.required' => ErrorMessages::generate('field.required', ['field' => 'Password']),
         ];
     }
 }
