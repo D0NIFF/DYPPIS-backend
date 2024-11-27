@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserService\AuthUserRequest;
 use App\Models\User;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -33,13 +36,19 @@ class PersonalAccessTokenController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    /**
+     *  Remove the authorization token
+     *
+     *  @param Request $request
+     *  @return ResponseFactory|Application|Response
+     */
+    public function destroy(Request $request): Application|Response|ResponseFactory
     {
         $request->user()->currentAccessToken()->delete();
         return response([
-            'status' => 'Success',
+            'status' => 'success',
             'message' => 'Token successfully removed.',
         ], 204);
-
     }
+
 }
