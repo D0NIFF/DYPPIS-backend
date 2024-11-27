@@ -1,4 +1,12 @@
 {
+    "credentials": {
+        "en": "The provided credentials are incorrect.",
+        "es": "Las credenciales proporcionadas son incorrectas.",
+        "de": "Die angegebenen Anmeldedaten sind falsch.",
+        "fr": "Les informations d'identification fournies sont incorrectes.",
+        "it": "Le credenziali fornite non sono corrette.",
+        "ru": "Указанные учетные данные неверны."
+    },
     "field.required": {
         "en": "The '{field}' field is required.",
         "es": "El campo '{field}' es obligatorio.",
@@ -7,8 +15,84 @@
         "it": "Il campo '{field}' è obbligatorio.",
         "ru": "Поле '{field}' обязательно для заполнения."
     },
+    "field.uuid": {
+        "en": "The '{field}' must be a UUID.",
+        "es": "El campo '{field}' debe ser un UUID.",
+        "de": "Das Feld '{field}' muss eine UUID sein.",
+        "fr": "Le champ '{field}' doit être un UUID.",
+        "it": "Il campo '{field}' deve essere un UUID.",
+        "ru": "Поле '{field}' должно быть UUID."
+    },
+    "field.email": {
+        "en": "The '{field}' must be a e-mail.",
+        "es": "El campo '{field}' debe ser un correo electrónico.",
+        "de": "Das Feld '{field}' muss eine E-Mail sein.",
+        "fr": "Le champ '{field}' doit être un e-mail.",
+        "it": "Il campo '{field}' deve essere un'e-mail.",
+        "ru": "Поле '{field}' должно быть электронным письмом."
+    },
+    "field.file": {
+        "en": "The '{field}' must be a file.",
+        "es": "El campo '{field}' debe ser un archivo.",
+        "de": "Das Feld '{field}' muss eine Datei sein.",
+        "fr": "Le champ '{field}' doit être un fichier.",
+        "it": "Il campo '{field}' deve essere un file.",
+        "ru": "Поле '{field}' должно быть файлом."
+    },
+    "field.string": {
+        "en": "The '{field}' must be a string",
+        "es": "El campo '{field}' debe ser una cadena",
+        "de": "Das Feld '{field}' muss eine Zeichenkette sein.",
+        "fr": "Le champ '{field}' doit être une chaîne",
+        "it": "Il campo '{field}' deve essere una stringa",
+        "ru": "Поле '{field}' должно быть строкой."
+    },
     "field.integer": {
-        "en": "The field must be an integer.",
-        "ru": "Поле должно быть целым числом."
+        "en": "The '{field}' must be a number.",
+        "es": "El campo '{field}' debe ser un número.",
+        "de": "Das Feld '{field}' muss eine Zahl sein.",
+        "fr": "Le champ '{field}' doit être un nombre.",
+        "it": "Il campo '{field}' deve essere un numero.",
+        "ru": "Поле '{field}' должно быть числом."
+    },
+    "field.min": {
+        "en": "String '{field}' must contain a minimum of {count} characters",
+        "es": "La cadena '{field}' debe contener un mínimo de {count} caracteres.",
+        "de": "Die Zeichenkette '{field}' muss mindestens {count} Zeichen enthalten.",
+        "fr": "La chaîne '{field}' doit contenir au minimum {count} caractères.",
+        "it": "La stringa '{field}' deve contenere un minimo di {count} caratteri.",
+        "ru": "Строка '{field}' должна содержать не менее {count} символов."
+    },
+    "field.max": {
+        "en": "The '{field}' string can contain a maximum of {count} characters",
+        "es": "La cadena '{field}' puede contener un máximo de {count} caracteres.",
+        "de": "Die Zeichenkette '{field}' kann maximal {count} Zeichen enthalten.",
+        "fr": "La chaîne '{field}' peut contenir au maximum {count} caractères.",
+        "it": "La stringa '{field}' può contenere un massimo di {count} caratteri.",
+        "ru": "Строка '{field}' может содержать максимум {count} символов."
+    },
+    "field.mimes": {
+        "en": "Wrong file type. Available types: {mimes}",
+        "es": "Tipo de archivo incorrecto. Tipos disponibles: {mimes}",
+        "de": "Falscher Dateityp. Verfügbare Typen: {mimes}",
+        "fr": "Type de fichier incorrect. Types disponibles : {mimes}",
+        "it": "Tipo di file errato. Tipi disponibili: {mimes}",
+        "ru": "Неверный тип файла. Доступные типы: {mimes}"
+    },
+    "field.exists": {
+        "en": "The linked record does not exist in the database",
+        "es": "El registro vinculado no existe en la base de datos.",
+        "de": "Der verknüpfte Datensatz existiert nicht in der Datenbank.",
+        "fr": "L'enregistrement lié n'existe pas dans la base de données.",
+        "it": "Il record collegato non esiste nel database.",
+        "ru": "Связанная запись не существует в базе данных."
+    },
+    "file.max": {
+        "en": "The uploaded file can be a maximum of {count} mb",
+        "es": "El archivo subido puede tener un máximo de {count} mb.",
+        "de": "Die hochgeladene Datei darf maximal {count} mb groß sein.",
+        "fr": "Le fichier téléchargé peut avoir une taille maximale de {count} mo.",
+        "it": "Il file caricato può essere al massimo di {count} mb.",
+        "ru": "Загружаемый файл может иметь размер не более {count} мб."
     }
 }
