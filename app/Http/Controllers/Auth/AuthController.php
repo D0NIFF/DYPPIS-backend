@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserService\LoginUserRequest;
-use App\Http\Requests\UserService\RegisterUserRequest;
+use App\Http\Requests\UserService\AuthorizationRequest;
+use App\Http\Requests\UserService\RegistrationRequest;
 use App\Http\Resources\UserService\UserResource;
 use App\Utils\UuidHelper;
 use Illuminate\Http\JsonResponse;
@@ -22,10 +22,10 @@ class AuthController extends Controller
     /**
      *  User registration
      *
-     *  @param RegisterUserRequest $request
+     *  @param RegistrationRequest $request
      *  @return JsonResponse
      */
-    public function registration(RegisterUserRequest $request): JsonResponse
+    public function registration(RegistrationRequest $request): JsonResponse
     {
         $validatedData = $request->validated();
         $validatedData['id'] = UuidHelper::generateUuid();
@@ -39,11 +39,11 @@ class AuthController extends Controller
     /**
      *  User authorization
      *
-     *  @param LoginUserRequest $request
+     *  @param AuthorizationRequest $request
      *  @return JsonResponse
      *  @throws ValidationException
      */
-    public function authorization(LoginUserRequest $request): JsonResponse
+    public function authorization(AuthorizationRequest $request): JsonResponse
     {
         $user = User::where('email', $request->email)->first();
 

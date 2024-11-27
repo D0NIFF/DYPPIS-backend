@@ -6,7 +6,7 @@ use App\Utils\ErrorMessages;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterUserRequest extends FormRequest
+class RegistrationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -52,6 +52,7 @@ class RegisterUserRequest extends FormRequest
             'password.required' => ErrorMessages::generate('field.required', ['field' => 'Password']),
             'password.string' => ErrorMessages::generate('field.string', ['field' => 'Password']),
             'password.min' => ErrorMessages::generate('field.min', ['field' => 'Password', 'count' => '8']),
+            'password.confirmed' => ErrorMessages::generate('password.confirmed'),
         ];
     }
 }

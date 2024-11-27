@@ -6,7 +6,7 @@ use App\Utils\ErrorMessages;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginUserRequest extends FormRequest
+class AuthorizationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
