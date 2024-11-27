@@ -16,16 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
 
     Route::get('/test', function (Request $request) {
-        return 'Test route';
+        return \App\Utils\UuidHelper::generateUuid();
     });
 
     /**
      *  Authorization
      */
     Route::prefix('auth')->group(function () {
-        Route::post('/signin', [AuthController::class, 'login']);
-        Route::post('/signup', [AuthController::class, 'register']);
-        Route::post('/signout', [AuthController::class, 'logout']);
+        Route::post('/signin', [AuthController::class, 'authorization']);
+        Route::post('/signup', [AuthController::class, 'registration']);
+        Route::post('/signout', [AuthController::class, 'logout'])
+            ->middleware('auth:sanctum');
     });
 
     /**
