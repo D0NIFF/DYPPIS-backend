@@ -8,40 +8,14 @@ class ErrorMessages
 {
     protected static $messages;
 
-//    public function __construct()
-//    {
-//        $path = resource_path('lang/error_messages.json');
-//        self::$messages = json_decode(File::get($path), true);
-//    }
-//
-//    /**
-//     *  Get error messages for a given key and substitute the field
-//     *
-//     *  @param string $key
-//     *  @param string $field
-//     *  @return array
-//     */
-//    public function getMessages(string $key, string $field)
-//    {
-//        if (!isset($this->messages[$key])) {
-//            return ['en' => 'Message not found'];
-//        }
-//
-//        $response = array_map(function($message) use ($field) {
-//            return str_replace('{field}', $field, $message);
-//        }, $this->messages[$key]);
-//
-//        return $response;
-//    }
-
     /**
      *  Get error messages for a given key and substitute the field
      *
      *  @param string $key
-     *  @param string $field
+     *  @param array|null $data
      *  @return array
      */
-    public static function getMessages(string $key, string $field)
+    public static function generate(string $key, array|null $data = []): array
     {
         if (self::$messages === null) {
             $path = resource_path('lang/error_messages.json');
@@ -49,13 +23,23 @@ class ErrorMessages
         }
 
         if (!isset(self::$messages[$key])) {
-            return ['en' => 'Message not found'];
+            return [
+                'en' => 'Message not found',
+                'es' => 'Mensaje no encontrado',
+                'de' => 'Nachricht nicht gefunden',
+                'fr' => 'Message non trouvé',
+                'it' => 'Messaggio non trovato',
+                'ru' => 'Сообщение не найдено'
+            ];
         }
 
-        $response = array_map(function($message) use ($field) {
-            return str_replace('{field}', $field, $message);
+        return array_map(function($message) use ($data) {
+            if ($data) {
+                foreach ($data as $key => $value) {
+                    $message = str_replace('{' . $key . '}', $value, $message);
+                }
+            }
+            return $message;
         }, self::$messages[$key]);
-
-        return $response;
     }
 }
