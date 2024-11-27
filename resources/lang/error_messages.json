@@ -102,5 +102,13 @@
         "fr": "Le fichier téléchargé peut avoir une taille maximale de {count} mo.",
         "it": "Il file caricato può essere al massimo di {count} mb.",
         "ru": "Загружаемый файл может иметь размер не более {count} мб."
+    },
+    "password.confirmed": {
+        "en": "The passwords don't match",
+        "es": "Las contraseñas no coinciden.",
+        "de": "Die Passwörter stimmen nicht überein.",
+        "fr": "Les mots de passe ne correspondent pas.",
+        "it": "Le password non corrispondono.",
+        "ru": "Пароли не совпадают."
     }
 }
