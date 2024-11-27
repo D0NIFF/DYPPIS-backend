@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\V1\Response\RequestFormMessageController;
 use App\Utils\ErrorMessages;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuthUserRequest extends FormRequest
+class LoginUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
