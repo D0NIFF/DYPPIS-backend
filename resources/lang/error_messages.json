@@ -71,6 +71,14 @@
         "it": "La stringa '{field}' può contenere un massimo di {count} caratteri.",
         "ru": "Строка '{field}' может содержать максимум {count} символов."
     },
+    "field.unique": {
+        "en": "A user with this {field} already exists",
+        "es": "Ya existe un usuario con este {field}.",
+        "de": "Ein Benutzer mit diesem {field} existiert bereits.",
+        "fr": "Un utilisateur avec ce {field} existe déjà.",
+        "it": "Un utente con questo {field} esiste già.",
+        "ru": "Пользователь с таким {field} уже существует."
+    },
     "field.mimes": {
         "en": "Wrong file type. Available types: {mimes}",
         "es": "Tipo de archivo incorrecto. Tipos disponibles: {mimes}",
