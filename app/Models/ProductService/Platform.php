@@ -38,7 +38,8 @@ class Platform extends Model
         return $this->belongsTo(PlatformType::class, 'type_id');
     }
 
-    public function categories() {
+    public function categories()
+    {
         return $this->belongsToMany(ProductCategory::class, 'product_filters', 'platform_id', 'category_id');
     }
 
