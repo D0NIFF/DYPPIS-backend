@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\MediaStorageController;
 use App\Http\Controllers\Api\V1\ProductService\PlatformTypeApiController;
 use App\Http\Controllers\Api\V1\ProductService\PlatformApiController;
+use App\Http\Controllers\Api\V1\ProductService\ProductApiController;
 use App\Http\Controllers\Api\V1\ProductService\ProductCategoryApiController;
 use App\Http\Controllers\Api\V1\UserService\UserController;
 use App\Http\Controllers\Auth\AuthController;
@@ -61,4 +62,9 @@ Route::prefix('v1')->group(function () {
     Route::get('/platforms/{id}/categories', [ProductCategoryApiController::class, 'index']);
     Route::get('/categories', [ProductCategoryApiController::class, 'index']);
 
+    /**
+     *  Products
+     */
+    Route::get('/platforms/{id}/categories', [ProductCategoryApiController::class, 'index']);
+    Route::get('/products', [ProductApiController::class, 'index']);
 });
