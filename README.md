@@ -2,6 +2,8 @@
 
 ## Routes
 
+#### [Authentication](https://github.com/D0NIFF/DYPPIS-backend/tree/main/docs/routes_authentication.md)
+
 ### Users
 `[GET] /api/v1/users/{id}` - Get user by ID <br>
 
