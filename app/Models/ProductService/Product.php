@@ -3,10 +3,14 @@
 namespace App\Models\ProductService;
 
 use App\Models\MediaStorage\MediaStorage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
+    use HasFactory;
     protected $keyType = 'string';
     public $incrementing = false;
 
@@ -47,27 +51,27 @@ class Product extends Model
         ];
     }
 
-    public function platform()
+    public function platform(): BelongsTo
     {
         return $this->belongsTo(Platform::class, 'platform_id');
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Platform::class, 'category_id');
     }
 
-    public function delivery()
+    public function delivery(): BelongsTo
     {
         return $this->belongsTo(Platform::class, 'delivery_id');
     }
 
-    public function response()
+    public function response(): BelongsTo
     {
         return $this->belongsTo(Platform::class, 'delivery_id');
     }
 
-    public function images()
+    public function images(): BelongsToMany
     {
         return $this->belongsToMany(MediaStorage::class, 'product_pictures', 'product_id', 'image_id');
     }
