@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1\ProductService;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductService\ProductCollection;
+use App\Models\ProductService\Product;
 use Illuminate\Http\Request;
 
 class ProductApiController extends Controller
@@ -12,7 +14,20 @@ class ProductApiController extends Controller
      */
     public function index(Request $request, string $id = null, string $categoryId = null)
     {
-        //
+        //$product = Product::with(['category'])->findOrFail($id);
+        if($id != null && $categoryId != null)
+        {
+            $products = Product::with(['platform', 'category', 'images'])
+                ->where('platform_id', $id)
+                ->where('category_id', $categoryId)
+                ->paginate($request->get('perPage', 30));
+        }
+        else {
+            $products = Product::with(['platform', 'category', 'delivery', 'images'])
+                ->paginate($request->get('perPage', 30));
+
+            return new ProductCollection($products);
+        }
     }
 
     /**
