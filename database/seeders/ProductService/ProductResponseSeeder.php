@@ -14,23 +14,23 @@ class ProductResponseSeeder extends Seeder
     {
         $productResponses = [
             [
-                'id' => '1f7f5u67-3b2f-4f5d-8c95-673cebh91632',
+                'id' => 'c1971fa1-3a87-4645-af60-1a11381e768c',
                 'response' => 'test'
             ],
             [
-                'id' => '2f7f5u67-3b2f-4f5d-8c95-673cebh91632',
+                'id' => 'c2971fa1-3a87-4645-af60-1a11381e768c',
                 'response' => 'test 2'
             ],
             [
-                'id' => '3f7f5u67-3b2f-4f5d-8c95-673cebh91632',
+                'id' => 'c3971fa1-3a87-4645-af60-1a11381e768c',
                 'response' => 'test 3'
             ],
             [
-                'id' => '4f7f5u67-3b2f-4f5d-8c95-673cebh91632',
+                'id' => 'c4971fa1-3a87-4645-af60-1a11381e768c',
                 'response' => 'test 4'
             ],
             [
-                'id' => '5f7f5u67-3b2f-4f5d-8c95-673cebh91632',
+                'id' => 'c5971fa1-3a87-4645-af60-1a11381e768c',
                 'response' => 'test 5'
             ]
         ];
