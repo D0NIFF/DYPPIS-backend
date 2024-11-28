@@ -21,6 +21,8 @@ class ProductApiController extends Controller
                 ->where('platform_id', $id)
                 ->where('category_id', $categoryId)
                 ->paginate($request->get('perPage', 30));
+
+            return new ProductCollection($products);
         }
         else {
             $products = Product::with(['platform', 'category', 'delivery', 'images'])

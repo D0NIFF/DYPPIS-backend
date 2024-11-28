@@ -7,7 +7,6 @@ use App\Http\Controllers\Api\V1\ProductService\ProductApiController;
 use App\Http\Controllers\Api\V1\ProductService\ProductCategoryApiController;
 use App\Http\Controllers\Api\V1\UserService\UserController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\PersonalAccessTokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
