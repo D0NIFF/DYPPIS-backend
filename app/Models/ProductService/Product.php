@@ -2,6 +2,7 @@
 
 namespace App\Models\ProductService;
 
+use App\Models\MediaStorage\MediaStorage;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -49,5 +50,25 @@ class Product extends Model
     public function platform()
     {
         return $this->belongsTo(Platform::class, 'platform_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Platform::class, 'category_id');
+    }
+
+    public function delivery()
+    {
+        return $this->belongsTo(Platform::class, 'delivery_id');
+    }
+
+    public function response()
+    {
+        return $this->belongsTo(Platform::class, 'delivery_id');
+    }
+
+    public function images()
+    {
+        return $this->belongsToMany(MediaStorage::class, 'product_pictures', 'product_id', 'image_id');
     }
 }
