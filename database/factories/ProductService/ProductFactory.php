@@ -17,11 +17,12 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => $this->faker->uuid(),
             'title' => $this->faker->word(),
             'description' => $this->faker->paragraph(),
             'price' => $this->faker->numberBetween(1000, 10000),
             'old_price' => $this->faker->numberBetween(8000, 15000),
-            'response_id' => $this->faker->randomElement(['1f7f5u67-3b2f-4f5d-8c95-673cebh91632', '2f7f5u67-3b2f-4f5d-8c95-673cebh91632', '3f7f5u67-3b2f-4f5d-8c95-673cebh91632', '4f7f5u67-3b2f-4f5d-8c95-673cebh91632', '5f7f5u67-3b2f-4f5d-8c95-673cebh91632']),
+            'response_id' => $this->faker->randomElement(['c1971fa1-3a87-4645-af60-1a11381e768c', 'c2971fa1-3a87-4645-af60-1a11381e768c', 'c3971fa1-3a87-4645-af60-1a11381e768c', 'c4971fa1-3a87-4645-af60-1a11381e768c', 'c5971fa1-3a87-4645-af60-1a11381e768c']),
             'platform_id' => $this->faker->randomElement([
                 '1a8532ec-734a-4cab-bb52-9bc8bb2b4af8',
                 '2a8532ec-734a-4cab-bb52-9bc8bb2b4af8',
@@ -32,7 +33,7 @@ class ProductFactory extends Factory
                 '7a8532ec-734a-4cab-bb52-9bc8bb2b4af8',
                 '8a8532ec-734a-4cab-bb52-9bc8bb2b4af8',
             ]),
-            'category_id' => $this->faker->randomElement(['16236c66-d7da-56f9-92df-40dfde284b26', '26236c66-d7da-56f9-92df-40dfde284b26', '36236c66-d7da-56f9-92df-40dfde284b26', '46236c66-d7da-56f9-92df-40dfde284b26', '56236c66-d7da-56f9-92df-40dfde284b26']),
+            'category_id' => $this->faker->randomElement(['1f7f5d67-3a2f-4e5d-8c95-237cebc91632', '2f7f5d67-3a2f-4e5d-8c95-237cebc91632', '3f7f5d67-3a2f-4e5d-8c95-237cebc91632', '4f7f5d67-3a2f-4e5d-8c95-237cebc91632', '5f7f5d67-3a2f-4e5d-8c95-237cebc91632']),
             'delivery_id' => $this->faker->randomElement(['1e615962-37c0-3ab0-dbc8-e06b1681ddb0', '2e615962-37c0-3ab0-dbc8-e06b1681ddb0', '3e615962-37c0-3ab0-dbc8-e06b1681ddb0']),
         ];
     }
