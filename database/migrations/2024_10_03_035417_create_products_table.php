@@ -27,7 +27,8 @@ return new class extends Migration
             $table->float('old_price')
                 ->nullable();
 
-            $table->jsonb('details');
+            $table->jsonb('details')
+                ->nullable();
 
             $table->uuid('response_id');
             $table->foreign('response_id')
