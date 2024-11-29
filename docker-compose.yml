@@ -16,6 +16,15 @@ services:
         image: redis
         ports:
             - "6379:6379"
+    typesense:
+        image: typesense/typesense:latest
+        environment:
+            - TYPESENSE_API_KEY=test
+        ports:
+            - "8108:8108"
+        volumes:
+            - ./typesense-data:/data
+#        command: '--data-dir /data --api-key=xyz --enable-cors'
 
 volumes:
     postgres-data:
