@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
 
     Route::get('/test', function (Request $request) {
-        return \App\Utils\UuidHelper::generateUuid();
+
     });
 
     /**
@@ -66,4 +66,6 @@ Route::prefix('v1')->group(function () {
      */
     Route::get('/platforms/{id}/categories', [ProductCategoryApiController::class, 'index']);
     Route::get('/products', [ProductApiController::class, 'index']);
+    Route::post('/products', [ProductApiController::class, 'store'])
+        ->middleware('auth:sanctum');
 });
