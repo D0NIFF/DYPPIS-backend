@@ -15,6 +15,36 @@ class Product extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
+    /**
+     *  Get array, when will use for index at Typesense
+     *
+     *  @return array
+     */
+    public function toSearchableArray()
+    {
+        // Index fields
+        return [
+            'title' => $this->title,
+            'description' => $this->description,
+        ];
+    }
+
+    /**
+     *  Get Typesense configuration
+     *
+     *  @return array
+     */
+    public function typesenseIndexSettings(): array
+    {
+        return [
+            'fields' => [
+                ['name' => 'title', 'type' => 'string'],
+                ['name' => 'description', 'type' => 'string'],
+            ],
+            'default_sorting_field' => 'title',
+        ];
+    }
+
     protected $fillable = [
         'id',
         'title',
