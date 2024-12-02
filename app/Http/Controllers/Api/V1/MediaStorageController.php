@@ -9,7 +9,9 @@ use App\Http\Requests\StoreMediaStorageRequest;
 use App\Http\Resources\MediaStorage\MediaStorageResource;
 use App\Models\MediaStorage\MediaStorage;
 use App\Models\MediaStorage\MediaStorageCategory;
+use App\Utils\ApiResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
@@ -31,10 +33,10 @@ class MediaStorageController extends Controller
      *  Store a newly created resource in storage.
      *
      *  @param StoreMediaStorageRequest $request
-     *  @return array
+     *  @return JsonResponse
      *  @throws BadRequestException
      */
-    public function store(StoreMediaStorageRequest $request) : array
+    public function store(StoreMediaStorageRequest $request): JsonResponse
     {
         $category = MediaStorageCategory::findOrFail($request->category_id);
         $file = $request->file('file');
@@ -50,7 +52,7 @@ class MediaStorageController extends Controller
         try {
             Storage::disk('public')->putFileAs($category->path, $file, $fileInfo['file_name']);
             MediaStorage::insert($fileInfo);
-            return $fileInfo;
+            return ApiResponse::created($fileInfo);
         }
         catch (\Exception $e) {
             $errorInfo = [
@@ -127,9 +129,9 @@ class MediaStorageController extends Controller
      *  Remove the specified resource from storage.
      *
      *  @param string $id
-     *  @return Response
+     *  @return JsonResponse
      */
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
         $fileInfo = MediaStorage::where('id', $id)
             ->first(['file_name', 'category_id']);
@@ -139,6 +141,6 @@ class MediaStorageController extends Controller
         Storage::disk('public')->delete($categoryPath . '/' . $fileInfo->file_name);
         MediaStorage::destroy($id);
 
-        return response()->noContent();
+        return ApiResponse::deleted();
     }
 }
