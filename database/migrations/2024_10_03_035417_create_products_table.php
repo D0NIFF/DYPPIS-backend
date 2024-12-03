@@ -30,6 +30,12 @@ return new class extends Migration
             $table->jsonb('details')
                 ->nullable();
 
+            $table->uuid('user_id')
+                ->nullable();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
+
             $table->uuid('response_id');
             $table->foreign('response_id')
                 ->references('id')
