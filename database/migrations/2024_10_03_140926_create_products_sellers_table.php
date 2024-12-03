@@ -18,8 +18,8 @@ return new class extends Migration
                 ->references('id')
                 ->on('products');
 
-            $table->uuid('seller_id');
-            $table->foreign('seller_id')
+            $table->uuid('user_id');
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
         });
