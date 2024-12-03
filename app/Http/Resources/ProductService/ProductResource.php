@@ -3,6 +3,7 @@
 namespace App\Http\Resources\ProductService;
 
 use App\Http\Resources\MediaStorage\MediaStorageCollection;
+use App\Http\Resources\UserService\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,6 +25,7 @@ class ProductResource extends JsonResource
             'details' => $this->details,
             'views' => $this->views,
             'images' => $this->images ? new MediaStorageCollection($this->images) : null,
+            'seller' => $this->seller ? new UserResource($this->seller) : null,
             'platform' => $this->platform ? new PlatformResource($this->platform) : null,
             'category' => $this->category ? new ProductCategoryResource($this->category) : null,
             'delivery' => $this->delivery ? new ProductDeliveryResource($this->delivery) : null,
